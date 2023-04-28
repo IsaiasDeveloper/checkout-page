@@ -1,0 +1,327 @@
+/*
+:root {
+    --primary: #22D2B3;
+    --secundary: #003399;
+    --support: #199983;
+    --blackColor: #000000;
+    --whiteColor: #FFFFFF;
+    --grayColor: #5C6F82;
+    --iceColor: #F5F5F5;
+    --cardsBarColor: #CBCDCE;
+    --findAppMaskColor: #0C162F;
+    --findAppMasc: #081018;
+    --defaultFont: "Montserrat";
+    --Oswald: "BIZ UDGothic", sans-serif;
+    --transparentdarkColor: #081018c4;
+    --transparentWindow: #081018eb;
+    --inputsBgLogin: #ffffff1f;
+}
+*/
+body,
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: var(--iceColor);
+  font-family: var(--defaultFont) !important;
+}
+
+/* Nav seciton */
+nav {
+  width: 100%;
+  background-color: var(--iceColor);
+  color: var(--cardsBarColor);
+  border-bottom: 1px solid;
+  position: fixed;
+  top: 0;
+  z-index: 2;
+}
+.container {
+  max-width: 1000px;
+  width: 90%;
+  margin: auto;
+}
+/* And of Nav seciton */
+
+/* Form section */
+.content {
+  width: 100%;
+  padding: 120px 0 80px;
+}
+.contentContainer {
+  max-width: 1000px;
+  width: 90%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  position: relative;
+}
+.firstColumn {
+  width: 48%;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+.numbersFields {
+  width: auto;
+  padding: 0 10px 0 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  row-gap: 20px;
+}
+.verticalBar {
+  position: absolute;
+  top: 0;
+  left: 14px;
+  width: 2px;
+  height: 100%;
+  background-color: var(--cardsBarColor);
+  z-index: 0;
+}
+.formIndicationFields,
+.mobileTitleNamber {
+  color: var(--whiteColor);
+  font-size: 16px;
+  font-weight: bold;
+  background-color: var(--secundary);
+  border-radius: 50%;
+  padding: 5px 11px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+.formBox {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+}
+.formTitle {
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  column-gap: 10px;
+  margin-bottom: 25px;
+}
+.typeFormBox {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 15px;
+}
+
+.physicalPerson,
+.legalPerson {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid var(--cardsBarColor);
+  cursor: pointer;
+}
+.physicalPerson:active,
+.legalPerson:active {
+  border-bottom: 2px solid var(--secundary);
+}
+.typeFormBoxText {
+  color: var(--grayColor);
+  font-size: 13px;
+  font-weight: bold;
+  padding-bottom: 5px;
+  transition: all 500ms;
+  width: 100%;
+  text-align: center;
+}
+.typeFormBoxText:hover {
+  transform: scale(1.02);
+}
+.typeFormBoxText:active {
+  color: var(--secundary);
+}
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+}
+.partOne {
+  margin-bottom: 60px;
+}
+label {
+  width: 100%;
+  font-size: 14px;
+  text-align: start;
+  font-weight: 600;
+  color: var(--grayColor);
+}
+input {
+  width: 100%;
+  border: 1px solid var(--cardsBarColor);
+  background-color: var(--whiteColor);
+  border-radius: 5px;
+  padding-left: 10px;
+  height: 35px;
+  margin-bottom: 10px;
+  margin-top: 3px;
+  outline: none;
+}
+input::placeholder {
+  color: var(--grayColor);
+  font-family: var(--defaultFont) !important;
+  font-size: 12px;
+}
+.responsiveSupport {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+.cepLabel {
+  width: 35%;
+}
+.getAddressWithCep {
+  width: 57%;
+  font-size: 12px;
+  font-weight: bold;
+  background-color: var(--secundary);
+  text-align: center;
+  color: var(--whiteColor);
+  border-radius: 5px;
+  padding: 10px 0;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: all 500ms;
+}
+.getAddressWithCep:hover {
+  transform: scale(1.02);
+}
+
+.getAddressWithCep:active {
+  filter: brightness(75%);
+}
+.addressLabel {
+  width: 60%;
+}
+.numberLabel {
+  width: 30%;
+}
+.neighborhoodLabel {
+  width: 50%;
+}
+.complementLabel {
+  width: 42%;
+}
+.stateLabel {
+  width: 20%;
+}
+.cityLabel {
+  width: 72%;
+}
+.partTwo {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  margin-bottom: 60px;
+}
+.selectBox {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.selectBox select {
+  height: 35px;
+  color: var(--grayColor);
+  font-family: var(--defaultFont) !important;
+  border: 1px solid var(--cardsBarColor);
+  border-radius: 5px;
+  padding-left: 10px;
+}
+.formStateSelect {
+  width: 29%;
+}
+.formSchoolSelect {
+  width: 63%;
+}
+.partThree {
+  position: absolute;
+  bottom: -635px;
+  left: 48px;
+  height: auto;
+  width: 100%;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  margin-bottom: 60px;
+}
+.partThreeFields {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+}
+.partThreeAllBoxes {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: start;
+}
+.typOfPayment {
+  width: 48%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.typOfPayment label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.typOfPayment img {
+  width: 110px;
+}
+.typOfPayment input[type='radio'] {
+  width: 20px;
+}
+
+.formCreditCar,
+.captchaBox,
+.termBtnBox {
+  width: 48%;
+}
+/*
+
+
+
+
+*/
+
+#physicalPersonForm {
+  display: none;
+}
+
+/**/
+.secundColumn {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+}
+/* End of Form section */
