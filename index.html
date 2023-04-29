@@ -190,87 +190,106 @@
                 </div>
               </div>
               <div class="partThree">
-                <p class="formTitle">
-                  <span class="mobileTitleNamber">3 </span> Como você prefere
-                  pagar?
-                </p>
-                <div class="partThreeAllBoxes">
-                  <div class="partThreeFields">
-                    <div class="typOfPayment">
-                      <label for="creditCar-lp"
-                        ><img src="img/credit-card_image.png" alt="Image" />
-                        <input
-                          type="radio"
-                          name="payment-lp"
-                          value="creditCar-lp"
-                        />
-                      </label>
-                      <label for="pix-lp"
-                        ><img src="img/pix_image.png" alt="Image" />
-                        <input type="radio" name="payment-lp" value="pix-lp" />
-                      </label>
-                      <label for="ticket-lp"
-                        ><img src="img/ticket_image.png" alt="Image" />
-                        <input
-                          type="radio"
-                          name="payment-lp"
-                          value="ticket-lp"
-                        />
-                      </label>
-                    </div>
-                    <div class="formCreditCar">
-                      <input
-                        type="text"
-                        name="nameCard-lp"
-                        id="nameCard-lp"
-                        placeholder="Nome no cartão"
-                      />
-                      <input
-                        type="text"
-                        name="numberCard-lp"
-                        id="numberCard-lp"
-                        placeholder="Número do cartão*"
-                      />
-                      <input
-                        type="text"
-                        name="cardSafeCode-lp"
-                        id="cardSafeCode-lp"
-                        placeholder="Cod. Seg*"
-                      />
-                      <input
-                        type="date"
-                        name="cardValidation-lp"
-                        id="cardValidation-lp"
-                        placeholder="MM/AA"
-                      />
-                    </div>
-                    <div class="captchaBox">
-                      <label for="captcha">Repita os números:</label>
-                      <span>
+                <div class="partThreeContent">
+                  <p class="formTitle">
+                    <span class="mobileTitleNamber">3 </span> Como você prefere
+                    pagar?
+                  </p>
+                  <div class="partThreeAllBoxes">
+                    <div class="partThreeFields">
+                      <div class="typOfPayment">
+                        <label for="creditCar-lp"
+                          ><img src="img/credit-card_image.png" alt="Image" />
+                          <input
+                            type="radio"
+                            name="payment-lp"
+                            value="creditCar-lp"
+                          />
+                        </label>
+                        <label for="pix-lp"
+                          ><img src="img/pix_image.png" alt="Image" />
+                          <input
+                            type="radio"
+                            name="payment-lp"
+                            value="pix-lp"
+                          />
+                        </label>
+                        <label for="ticket-lp"
+                          ><img src="img/ticket_image.png" alt="Image" />
+                          <input
+                            type="radio"
+                            name="payment-lp"
+                            value="ticket-lp"
+                          />
+                        </label>
+                      </div>
+                      <div class="formCreditCar">
                         <input
                           type="text"
-                          id="captchaCode-lp"
-                          placeholder="Captcha"
+                          name="nameCard-lp"
+                          id="nameCard-lp"
+                          placeholder="Nome no cartão"
                         />
-                        <img
-                          src="img/captcha_image.png"
-                          alt="Image"
-                          class="captchaImg"
+                        <input
+                          type="text"
+                          name="numberCard-lp"
+                          id="numberCard-lp"
+                          placeholder="Número do cartão*"
                         />
-                      </span>
-                    </div>
-                    <div class="termBtnBox">
-                      <div class="termPoliticBox">
-                        <input type="checkbox" name="term-lp" id="term-lp" />
-                        <label for="term"
-                          >Aceito os
-                          <a class="termPageLink">Termos do Aluno</a> e
-                          <a class="politicPageLink">
-                            Políticas de Privacidade</a
+                        <input
+                          type="text"
+                          name="cardSafeCode-lp"
+                          id="cardSafeCode-lp"
+                          class="cardSafeCode"
+                          placeholder="Cod. Seg*"
+                        />
+                        <input
+                          type="date"
+                          name="cardValidation-lp"
+                          id="cardValidation-lp"
+                          class="cardValidation"
+                          placeholder="MM/AA"
+                        />
+                      </div>
+                      <div class="captchaBox">
+                        <label for="captcha">Repita os números:</label>
+                        <span>
+                          <input
+                            type="text"
+                            id="captchaCode-lp"
+                            class="captchaCode"
+                            placeholder="Captcha"
+                          />
+                          <img
+                            src="img/captcha_image.png"
+                            alt="Image"
+                            class="captchaImg"
+                          />
+                        </span>
+                      </div>
+                      <div class="termBtnBox">
+                        <!-- <div class="termPoliticBox"> -->
+                        <label for="term" class="termLabel">
+                          <input
+                            type="checkbox"
+                            class="checkboxInput"
+                            name="term-lp"
+                            id="term-lp"
+                          />
+                          <span>
+                            Aceito os
+                            <a class="termPageLink">Termos do Aluno</a><br />
+                            e
+                            <a class="politicPageLink">
+                              Políticas de Privacidade</a
+                            ></span
                           ></label
                         >
+                        <!-- </div> -->
+                        <button type="submit" class="formSubmitBtn">
+                          MATRICULE-SE
+                        </button>
                       </div>
-                      <button type="submit">MATRICULE-SE</button>
                     </div>
                   </div>
                 </div>
@@ -392,12 +411,14 @@
                       type="text"
                       name="cardSafeCode-pp"
                       id="cardSafeCode-pp"
+                      class="cardSafeCode"
                       placeholder="Cod. Seg*"
                     />
                     <input
                       type="date"
                       name="cardValidation-pp"
                       id="cardValidation-pp"
+                      class="cardValidation"
                       placeholder="MM/AA"
                     />
                   </div>
@@ -407,6 +428,7 @@
                       <input
                         type="text"
                         id="captchaCode-pp"
+                        class="captchaCode"
                         placeholder="Captcha"
                       />
                       <img
@@ -417,16 +439,24 @@
                     </span>
                   </div>
                   <div class="termBtnBox">
-                    <div class="termPoliticBox">
-                      <input type="checkbox" name="term" id="term-pp" />
-                      <label for="term"
-                        >Aceito os <a class="termPageLink">Termos do Aluno</a> e
+                    <!-- <div class="termPoliticBox"> -->
+                    <label for="term" class="termLabel">
+                      <input
+                        type="checkbox"
+                        class="checkboxInput"
+                        name="term"
+                        id="term-pp"
+                      /><span>
+                        Aceito os <a class="termPageLink">Termos do Aluno</a> e
                         <a class="politicPageLink">
                           Políticas de Privacidade</a
-                        ></label
-                      >
-                    </div>
-                    <button type="submit">MATRICULE-SE</button>
+                        ></span
+                      ></label
+                    >
+                    <!-- </div> -->
+                    <button type="submit" class="formSubmitBtn">
+                      MATRICULE-SE
+                    </button>
                   </div>
                 </div>
               </div>
@@ -437,7 +467,9 @@
         <div class="secundColumn">
           <div class="infoCourse">
             <div class="headerInfoCourse">
-              <p class="titleCourse">Gestão de pessoas e liderança</p>
+              <div class="titleCourseBox">
+                <p class="titleCourse">Gestão de pessoas e liderança</p>
+              </div>
               <img
                 src="img/test-course_image.png"
                 alt=""
@@ -467,48 +499,48 @@
               </select>
               <p class="interest-free">Sem juros</p>
             </div>
-            <div class="insertDiscountCouponBox">
-              <div class="formDiscount">
-                <label for="coupon">Cupom:</label>
-                <input
-                  type="text"
-                  name="coupon"
-                  id="coupon"
-                  placeholder="Escreva o cupom aqui"
+          </div>
+          <div class="insertDiscountCouponBox">
+            <div class="formDiscount">
+              <label for="coupon" class="couponLabel">Cupom:</label>
+              <input
+                type="text"
+                name="coupon"
+                id="coupon"
+                placeholder="Escreva o cupom aqui"
+              />
+            </div>
+            <button class="couponBtn">USAR CUPOM</button>
+            <div class="congratulationBox">
+              <p class="congratulationText">
+                <b>Parabéns!</b><br />Você terá um
+                <b>
+                  desconto total de R$
+                  <span class="apiDiscount">168,00</span></b
+                >
+                como bolsista, se parcelas pagas até o dia do vencimento
+              </p>
+              <img src="img/congratulation_image.png" alt="Image" />
+            </div>
+            <div class="logoAddressBox">
+              <div class="logoAddressImg">
+                <img
+                  src="https://catalogo.drmeducacao.com.br/loja/imagens/logo14202118512660.png"
+                  alt="Image"
                 />
               </div>
-              <button class="couponBtn">USAR CUPOM</button>
-              <div class="congratulationBox">
-                <p class="congratulationText">
-                  <b>Parabéns!</b><br />Você terá um
-                  <b>
-                    desconto total de R$
-                    <span class="apiDiscount">168,00</span></b
-                  >
-                  como bolsista, se parcelas pagas até o dia do vencimento
+              <div class="infoInstitute">
+                <p class="instituteName"><b>IMPACTUS C.O EDUCACIONAL</b></p>
+                <p class="instituteAddress">
+                  Rua Guidoval, 14 - Pq. Industrial - 12223-222
                 </p>
-                <img src="img/congratulation_image.png" alt="Image" />
-              </div>
-              <div class="logoAddressBox">
-                <div class="logoAddressImg">
-                  <img
-                    src="https://catalogo.drmeducacao.com.br/loja/imagens/logo14202118512660.png"
-                    alt="Image"
-                  />
-                </div>
-                <div class="infoInstitute">
-                  <p class="instituteName"><b>IMPACTUS C.O EDUCACIONAL</b></p>
-                  <p class="instituteAddress">
-                    Rua Guidoval, 14 - Pq. Industrial - 12223-222
-                  </p>
-                </div>
               </div>
             </div>
           </div>
         </div>
         <!-- </div> -->
 
-        <div class="courseBtnColumn"></div>
+        <!-- <div class="courseBtnColumn"></div> -->
       </div>
     </section>
     <script src="js/index.js"></script>
