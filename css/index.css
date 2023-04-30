@@ -76,12 +76,13 @@ nav {
   position: relative;
   row-gap: 20px;
 }
+
 .verticalBar {
   position: absolute;
-  top: 0;
-  left: 14px;
+  top: 23px;
+  left: 5px;
   width: 2px;
-  height: 100%;
+  height: 102%;
   background-color: var(--cardsBarColor);
   z-index: 0;
 }
@@ -98,6 +99,8 @@ nav {
   align-items: center;
   z-index: 1;
 }
+.thirdFields {
+}
 .formBox {
   width: 90%;
   display: flex;
@@ -113,6 +116,7 @@ nav {
   align-items: center;
   column-gap: 10px;
   margin-bottom: 25px;
+  margin-left: -42px;
 }
 .typeFormBox {
   width: 100%;
@@ -121,7 +125,7 @@ nav {
   align-items: start;
   margin-bottom: 15px;
 }
-
+/*  legalPersonForm */
 .physicalPerson,
 .legalPerson {
   width: 50%;
@@ -158,11 +162,11 @@ form {
   justify-content: start;
 }
 .partOne {
-  margin-bottom: 60px;
+  margin-bottom: 30px;
 }
 label {
   width: 100%;
-  font-size: 14px;
+  font-size: 13px;
   text-align: start;
   font-weight: 600;
   color: var(--grayColor);
@@ -171,11 +175,12 @@ input {
   width: 100%;
   border: 1px solid var(--cardsBarColor);
   background-color: var(--whiteColor);
+  color: var();
   border-radius: 5px;
   padding-left: 10px;
-  height: 35px;
-  margin-bottom: 10px;
-  margin-top: 3px;
+  height: 30px;
+  margin-bottom: 7px;
+  margin-top: 1px;
   outline: none;
 }
 input::placeholder {
@@ -201,10 +206,11 @@ input::placeholder {
   text-align: center;
   color: var(--whiteColor);
   border-radius: 5px;
-  padding: 10px 0;
+  padding: 8px 0;
   margin-top: 10px;
   cursor: pointer;
   transition: all 500ms;
+  white-space: nowrap;
 }
 .getAddressWithCep:hover {
   transform: scale(1.02);
@@ -237,7 +243,7 @@ input::placeholder {
   flex-direction: column;
   justify-content: start;
   align-items: start;
-  margin-bottom: 60px;
+  margin-bottom: 10px;
 }
 .selectBox {
   width: 100%;
@@ -246,7 +252,7 @@ input::placeholder {
   align-items: center;
 }
 .selectBox select {
-  height: 35px;
+  height: 30px;
   color: var(--grayColor);
   font-family: var(--defaultFont) !important;
   border: 1px solid var(--cardsBarColor);
@@ -261,8 +267,9 @@ input::placeholder {
 }
 .partThree {
   position: absolute;
-  bottom: -315px;
-  left: 48px;
+  bottom: -340px;
+  /* left: 44px; */
+  left: 32px;
   right: 0;
   height: auto;
   margin-bottom: 60px;
@@ -272,19 +279,20 @@ input::placeholder {
   /* width: 90%; */
   width: 100%;
   margin: auto;
+  /* margin-left: -11px; */
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: start;
-  padding-left: 35px;
 }
 .partThreeFields {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  /* justify-content: space-between; */
   justify-content: start;
-  align-items: start;
+  align-items: center;
+  column-gap: 30px;
+  row-gap: 30px;
 }
 .partThreeAllBoxes {
   width: 100%;
@@ -309,9 +317,10 @@ input::placeholder {
   width: 110px;
 }
 .typOfPayment input[type='radio'] {
-  width: 20px;
+  width: 15px;
+  color: var(--primary);
+  background-color: var(--primary);
 }
-
 .formCreditCar,
 .termBtnBox {
   width: 48%;
@@ -326,7 +335,7 @@ input::placeholder {
   width: 40%;
 }
 .cardValidation {
-  width: 25%;
+  width: 35%;
   margin-left: 40px;
 }
 .captchaBox {
@@ -345,7 +354,8 @@ input::placeholder {
 }
 .captchaBox img {
   width: 100px;
-  height: 35px;
+  height: 30px;
+  margin-left: 15px;
 }
 .termBtnBox {
   display: flex;
@@ -357,6 +367,8 @@ input::placeholder {
   display: flex;
   justify-content: start;
   align-items: start;
+  white-space: nowrap;
+  margin-right: 35px;
 }
 .checkboxInput {
   width: 15px;
@@ -373,7 +385,7 @@ input::placeholder {
   text-transform: uppercase;
   border-radius: 5px;
   background-color: var(--primary);
-  padding: 12px 50px;
+  padding: 10px 30px;
   font-size: 15px;
   font-weight: bold;
   color: var(--whiteColor);
@@ -391,6 +403,9 @@ input::placeholder {
   display: none;
 }
 
+#legalPersonForm {
+  /* display: none; */
+}
 /* Secund Column */
 .secundColumn {
   width: 40%;
@@ -401,7 +416,8 @@ input::placeholder {
 }
 .infoCourse {
   width: 100%;
-  height: 500px;
+  /* height: 500px; */
+  height: 400px;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
@@ -538,6 +554,7 @@ input::placeholder {
   padding: 10px 0;
   margin: 15px auto;
   transition: all 500ms;
+  font-family: var(--defaultFont);
   cursor: pointer;
 }
 .couponBtn:hover {
@@ -555,12 +572,13 @@ input::placeholder {
   justify-content: start;
   align-items: start;
   background-color: var(--primary);
-  margin-bottom: 100px;
+  margin-bottom: 65px;
 }
 .congratulationText {
-  font-size: 11px;
+  font-size: 10px;
   width: 75%;
   color: var(--whiteColor);
+  z-index: 1;
 }
 .congratulationBox img {
   position: absolute;
@@ -601,3 +619,9 @@ input::placeholder {
   font-size: 11px;
 }
 /* End of Form section */
+
+/*
+
+PRECISO FAZER AJUSTES DE LAYOUT !!
+
+*/

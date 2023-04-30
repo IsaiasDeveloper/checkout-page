@@ -67,22 +67,27 @@
         <!-- <div class="formColumn"> -->
         <!-- First column -->
         <div class="firstColumn">
-          <div class="numbersFields">
-            <div class="verticalBar"></div>
-            <div class="formIndicationFields" data-form-fields="firstFields">
+          <div class="verticalBar"></div>
+          <!-- <div class="numbersFields"> -->
+          <!-- <div class="formIndicationFields" data-form-fields="firstFields">
               <p>1</p>
             </div>
             <div class="formIndicationFields" data-form-fields="secundFields">
               <p>2</p>
             </div>
-            <div class="formIndicationFields" data-form-fields="thirdFields">
+            <div
+              class="formIndicationFields thirdFields"
+              data-form-fields="thirdFields"
+            >
               <p>3</p>
-            </div>
-          </div>
+            </div> -->
+          <!-- </div> -->
           <div class="formBox">
             <p class="formTitle">
-              <span class="mobileTitleNamber">1 </span> Informações para sua
-              inscrição
+              <span class="mobileTitleNamber" data-form-fields="firstFields"
+                >1
+              </span>
+              Informações para sua inscrição
             </p>
             <div class="typeFormBox">
               <div class="physicalPerson">
@@ -178,7 +183,12 @@
               </div>
               <div class="partTwo">
                 <p class="formTitle">
-                  <span class="mobileTitleNamber">2 </span> Escolha seu polo
+                  <span
+                    class="mobileTitleNamber"
+                    data-form-fields="secundFields"
+                    >2
+                  </span>
+                  Escolha seu polo
                 </p>
                 <div class="selectBox">
                   <select name="" class="formStateSelect" id="selectState-lp">
@@ -192,8 +202,12 @@
               <div class="partThree">
                 <div class="partThreeContent">
                   <p class="formTitle">
-                    <span class="mobileTitleNamber">3 </span> Como você prefere
-                    pagar?
+                    <span
+                      class="mobileTitleNamber"
+                      data-form-fields="thirdFields"
+                      >3
+                    </span>
+                    Como você prefere pagar?
                   </p>
                   <div class="partThreeAllBoxes">
                     <div class="partThreeFields">
@@ -244,7 +258,7 @@
                           placeholder="Cod. Seg*"
                         />
                         <input
-                          type="date"
+                          type="month"
                           name="cardValidation-lp"
                           id="cardValidation-lp"
                           class="cardValidation"
@@ -296,8 +310,12 @@
               </div>
             </form>
             <!-- Physical person -->
-            <form method="POST" id="physicalPersonForm">
-              <div class="partOne">
+            <form
+              method="POST"
+              id="physicalPersonForm"
+              style="margin-top: 20px"
+            >
+              <div class="partOne" style="margin-bottom: 50px">
                 <label for="name-pp">Nome</label>
                 <input type="text" id="name-pp" placeholder="Digite seu nome" />
                 <label for="emai-pp">E-mail</label>
@@ -317,8 +335,10 @@
                     id="telefone-pp"
                     placeholder="(12) 99999-0000"
                   />
-                  <label for="cep-pp" class="cepLabel">CEP</label>
-                  <input type="number" id="cep-pp" placeholder="Digite o CEP" />
+                  <label for="cep-pp" class="cepLabel"
+                    >CEP
+                    <input type="number" id="cep-pp" placeholder="Digite o CEP"
+                  /></label>
                   <p class="getAddressWithCep">Completar endereço com CEP</p>
                   <label for="address-pp" class="addressLabel"
                     >Endereço
@@ -359,7 +379,11 @@
               </div>
               <div class="partTwo">
                 <p class="formTitle">
-                  <span class="mobileTitleNamber">2</span>Escolha seu polo
+                  <span
+                    class="mobileTitleNamber"
+                    data-form-fields="secundFields"
+                    >2</span
+                  >Escolha seu polo
                 </p>
                 <div class="selectBox">
                   <select name="" class="formStateSelect" id="selectState-pp">
@@ -372,8 +396,10 @@
               </div>
               <div class="partThree">
                 <p class="formTitle">
-                  <span class="mobileTitleNamber">3</span> Como você prefere
-                  pagar?
+                  <span class="mobileTitleNamber" data-form-fields="thirdFields"
+                    >3</span
+                  >
+                  Como você prefere pagar?
                 </p>
                 <div class="partThreeFields">
                   <div class="typOfPayment">
@@ -415,7 +441,7 @@
                       placeholder="Cod. Seg*"
                     />
                     <input
-                      type="date"
+                      type="month"
                       name="cardValidation-pp"
                       id="cardValidation-pp"
                       class="cardValidation"
@@ -447,7 +473,9 @@
                         name="term"
                         id="term-pp"
                       /><span>
-                        Aceito os <a class="termPageLink">Termos do Aluno</a> e
+                        Aceito os <a class="termPageLink">Termos do Aluno</a>
+                        <br />
+                        e
                         <a class="politicPageLink">
                           Políticas de Privacidade</a
                         ></span
