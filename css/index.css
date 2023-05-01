@@ -80,7 +80,7 @@ nav {
 .verticalBar {
   position: absolute;
   top: 23px;
-  left: 5px;
+  left: 10px;
   width: 2px;
   height: 102%;
   background-color: var(--cardsBarColor);
@@ -98,6 +98,8 @@ nav {
   justify-content: center;
   align-items: center;
   z-index: 1;
+  width: 31px;
+  height: 29px;
 }
 .thirdFields {
 }
@@ -126,8 +128,8 @@ nav {
   margin-bottom: 15px;
 }
 /*  legalPersonForm */
-.physicalPerson,
-.legalPerson {
+.physicalPersonOption,
+.legalPersonOption {
   width: 50%;
   display: flex;
   justify-content: center;
@@ -135,8 +137,8 @@ nav {
   border-bottom: 2px solid var(--cardsBarColor);
   cursor: pointer;
 }
-.physicalPerson:active,
-.legalPerson:active {
+.physicalPersonOption:active,
+.legalPersonOption:active {
   border-bottom: 2px solid var(--primary);
 }
 .typeFormBoxText {
@@ -195,6 +197,7 @@ input::placeholder {
   align-items: center;
   justify-content: space-between;
 }
+
 .cepLabel {
   width: 35%;
 }
@@ -259,6 +262,7 @@ input::placeholder {
   border-radius: 5px;
   padding-left: 10px;
 }
+
 .formStateSelect {
   width: 29%;
 }
@@ -269,7 +273,7 @@ input::placeholder {
   position: absolute;
   bottom: -340px;
   /* left: 44px; */
-  left: 32px;
+  left: 37px;
   right: 0;
   height: auto;
   margin-bottom: 60px;
@@ -312,6 +316,7 @@ input::placeholder {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 .typOfPayment img {
   width: 110px;
@@ -338,6 +343,7 @@ input::placeholder {
   width: 35%;
   margin-left: 40px;
 }
+
 .captchaBox {
   width: 30%;
   display: flex;
@@ -405,6 +411,15 @@ input::placeholder {
 
 #legalPersonForm {
   /* display: none; */
+}
+.unselected {
+  border-bottom: 2px solid var(--primary);
+}
+.selectedTitle {
+  color: var(--primary);
+}
+.invalid-field {
+  border: 1px solid red;
 }
 /* Secund Column */
 .secundColumn {
@@ -589,7 +604,7 @@ input::placeholder {
 }
 .logoAddressBox {
   width: 100%;
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   justify-content: start;
   align-items: start;
@@ -618,10 +633,107 @@ input::placeholder {
   text-align: start;
   font-size: 11px;
 }
+.infoInstituteColumnOne {
+  display: none;
+}
 /* End of Form section */
 
 /*
 
-PRECISO FAZER AJUSTES DE LAYOUT !!
+        MEDIA QUERY
 
 */
+
+@media (max-width: 992px) {
+  .contentContainer {
+    flex-direction: column;
+  }
+  .verticalBar {
+    display: none;
+  }
+  .firstColumn {
+    max-width: 600px;
+    width: 100%;
+    margin: auto;
+    justify-content: center;
+    order: 2;
+  }
+  .formTitle {
+    margin-left: 0;
+  }
+  .secundColumn {
+    max-width: 600px;
+    width: 100%;
+    margin: auto;
+  }
+  .infoCourse,
+  .insertDiscountCouponBox {
+    max-width: 380px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+  }
+  .infoInstituteColumnTwo {
+    display: none;
+  }
+  .formBox {
+    max-width: 380px;
+    width: 100%;
+  }
+  .partTwo {
+    margin-bottom: 30px;
+  }
+  .partThree {
+    position: unset;
+  }
+  .infoInstituteColumnOne {
+    display: flex;
+    margin-bottom: 50px;
+  }
+  .typOfPayment,
+  .formCreditCar,
+  .captchaBox,
+  .termBtnBox {
+    width: 100%;
+  }
+  body {
+    padding-bottom: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .cepLabel,
+  .addressLabel,
+  .numberLabel,
+  .neighborhoodLabel,
+  .cityLabel {
+    width: 100%;
+  }
+  .stateLabel {
+    width: 40%;
+  }
+  .complementLabel {
+    width: 50%;
+  }
+  .getAddressWithCep {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+  .termBtnBox {
+    flex-direction: column;
+  }
+  .typOfPayment {
+    justify-content: space-between;
+  }
+  .typOfPayment label {
+    width: 25%;
+  }
+  .typOfPayment img {
+    width: 100%;
+  }
+  .termLabel {
+    margin: 0;
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -90,157 +90,93 @@
               Informações para sua inscrição
             </p>
             <div class="typeFormBox">
-              <div class="physicalPersonOption">
+              <div class="physicalPerson">
                 <p class="typeFormBoxText">Pessoa Jurídica</p>
               </div>
-              <div class="legalPersonOption">
+              <div class="legalPerson">
                 <p class="typeFormBoxText">Pessoa Física</p>
               </div>
             </div>
             <!-- Legal person -->
             <form method="POST" id="legalPersonForm">
               <div class="partOne">
-                <label for="corporateReason" class="corporateReason"
-                  >Razão social</label
-                >
+                <label for="corporateReason">Razão social</label>
                 <input
                   type="text"
-                  name="corporateReason"
                   id="corporateReason"
-                  class="corporateReason required"
                   placeholder="Digita a razão social*"
                 />
-                <label for="fantasyName" class="corporateReason"
-                  >Nome fantasia</label
-                >
+                <label for="fantasyName">Nome fantasia</label>
                 <input
                   type="text"
-                  name="fantasyName"
                   id="fantasyName"
-                  class="corporateReason required"
                   placeholder="Digite o nome fantasia*"
                 />
-                <label for="cnpj" class="corporateReason">CNPJ</label>
-                <input
-                  type="text"
-                  name="cnpj"
-                  id="cnpj"
-                  class="corporateReason required"
-                  placeholder="Digite o CNPJ*"
-                />
-                <label for="stateRegistration" class="corporateReason"
-                  >Inscrição estadual</label
-                >
+                <label for="cnpj">CNPJ</label>
+                <input type="text" id="cnpj" placeholder="Digite o CNPJ*" />
+                <label for="stateRegistration">Inscrição estadual</label>
                 <input
                   type="text"
                   id="stateRegistration"
-                  class="corporateReason required"
-                  name="stateRegistration"
                   placeholder="Digite a inscrição Estadual*"
                 />
-                <label for="name">Nome</label>
-                <input
-                  type="text"
-                  name="name"
-                  class="physicalPerson required"
-                  id="name"
-                  placeholder="Digite seu nome"
-                />
-                <label for="email">E-mail</label>
+                <label for="name-lp">Nome</label>
+                <input type="text" id="name-lp" placeholder="Digite seu nome" />
+                <label for="emai-lp">E-mail</label>
                 <input
                   type="emai"
-                  name="email"
-                  class="physicalPerson required"
-                  id="email"
+                  id="emai-lp"
                   placeholder="Digite seu email"
                 />
-                <label for="rg">RG</label>
-                <input
-                  type="text"
-                  name="rg"
-                  class="physicalPerson required"
-                  id="rg"
-                  placeholder="Informe seu RG"
-                />
-                <label for="cpf">CPF</label>
-                <input
-                  type="text"
-                  name="cpf"
-                  class="physicalPerson required"
-                  id="cpf"
-                  placeholder="Informe seu CPF"
-                />
+                <label for="rg-lp">RG</label>
+                <input type="text" id="rg-lp" placeholder="Informe seu RG" />
+                <label for="cpf-lp">CPF</label>
+                <input type="text" id="cpf-lp" placeholder="Informe seu CPF" />
                 <div class="responsiveSupport">
-                  <label for="telefone">Telefone</label>
+                  <label for="telefone-lp">Telefone</label>
                   <input
                     type="text"
-                    name="telefone"
-                    id="telefone"
-                    class="physicalPerson required"
+                    id="telefone-lp"
                     placeholder="(12) 99999-0000"
                   />
-                  <label for="cep" class="cepLabel"
+                  <label for="cep-lp" class="cepLabel"
                     >CEP
-                    <input
-                      type="number"
-                      name="cep"
-                      class="physicalPerson required"
-                      id="cep"
-                      placeholder="Digite o CEP"
+                    <input type="number" id="cep-lp" placeholder="Digite o CEP"
                   /></label>
                   <p class="getAddressWithCep">Completar endereço com CEP</p>
-                  <label for="address" class="addressLabel"
+                  <label for="address-lp" class="addressLabel"
                     >Endereço
                     <input
                       type="text"
-                      name="address"
-                      class="physicalPerson required"
-                      id="address"
+                      id="address-lp"
                       placeholder="Digite seu endereço"
                   /></label>
-                  <label for="number" class="numberLabel"
+                  <label for="number-lp" class="numberLabel"
                     >Número
-                    <input
-                      type="number"
-                      name="number"
-                      class="physicalPerson required"
-                      id="number"
-                      placeholder="Número"
+                    <input type="number" id="number-lp" placeholder="Número"
                   /></label>
-                  <label for="neighborhood" class="neighborhoodLabel"
+                  <label for="neighborhood-lp" class="neighborhoodLabel"
                     >Bairro
                     <input
                       type="text"
-                      name="neighborhood"
-                      class="physicalPerson required"
-                      id="neighborhood"
+                      id="neighborhood-lp"
                       placeholder="Digite seu bairro"
                   /></label>
-                  <label for="complement" class="complementLabel"
+                  <label for="complement-lp" class="complementLabel"
                     >Complemento
                     <input
                       type="text"
-                      name="complement"
-                      class="physicalPerson required"
-                      id="complement"
+                      id="complement-lp"
                       placeholder="Apto, Bloco, Fundos"
                   /></label>
-                  <label for="state" class="stateLabel"
-                    >UF
-                    <input
-                      type="text"
-                      name="state"
-                      class="physicalPerson required"
-                      id="state"
-                      placeholder="Estado"
+                  <label for="state-lp" class="stateLabel"
+                    >UF <input type="text" id="state-lp" placeholder="Estado"
                   /></label>
-                  <label for="city" class="cityLabel"
+                  <label for="city-lp" class="cityLabel"
                     >Cidade
                     <input
                       type="text"
-                      name="city"
-                      class="physicalPerson required"
-                      id="city"
+                      id="city-lp"
                       placeholder="Digite sua cidade"
                   /></label>
                 </div>
@@ -263,20 +199,6 @@
                   </select>
                 </div>
               </div>
-              <div class="logoAddressBox infoInstituteColumnOne">
-                <div class="logoAddressImg">
-                  <img
-                    src="https://catalogo.drmeducacao.com.br/loja/imagens/logo14202118512660.png"
-                    alt="Image"
-                  />
-                </div>
-                <div class="infoInstitute">
-                  <p class="instituteName"><b>IMPACTUS C.O EDUCACIONAL</b></p>
-                  <p class="instituteAddress">
-                    Rua Guidoval, 14 - Pq. Industrial - 12223-222
-                  </p>
-                </div>
-              </div>
               <div class="partThree">
                 <div class="partThreeContent">
                   <p class="formTitle">
@@ -290,34 +212,28 @@
                   <div class="partThreeAllBoxes">
                     <div class="partThreeFields">
                       <div class="typOfPayment">
-                        <label for="creditCar"
+                        <label for="creditCar-lp"
                           ><img src="img/credit-card_image.png" alt="Image" />
                           <input
                             type="radio"
-                            name="payment"
-                            value="creditCar"
-                            id="creditCar"
-                            class="required required"
+                            name="payment-lp"
+                            value="creditCar-lp"
                           />
                         </label>
-                        <label for="pix"
+                        <label for="pix-lp"
                           ><img src="img/pix_image.png" alt="Image" />
                           <input
                             type="radio"
-                            name="payment"
-                            id="pix"
-                            value="pix"
-                            class="physicalPerson required"
+                            name="payment-lp"
+                            value="pix-lp"
                           />
                         </label>
-                        <label for="ticket"
+                        <label for="ticket-lp"
                           ><img src="img/ticket_image.png" alt="Image" />
                           <input
                             type="radio"
-                            name="payment"
-                            value="ticket"
-                            id="ticket"
-                            class="physicalPerson required"
+                            name="payment-lp"
+                            value="ticket-lp"
                           />
                         </label>
                       </div>
@@ -325,48 +241,37 @@
                         <input
                           type="text"
                           name="nameCard-lp"
-                          id="nameCard"
+                          id="nameCard-lp"
                           placeholder="Nome no cartão"
-                          class="physicalPerson required"
                         />
                         <input
                           type="text"
                           name="numberCard-lp"
-                          id="numberCard"
+                          id="numberCard-lp"
                           placeholder="Número do cartão*"
-                          class="physicalPerson required"
                         />
                         <input
                           type="text"
                           name="cardSafeCode-lp"
-                          id="cardSafeCode"
+                          id="cardSafeCode-lp"
                           class="cardSafeCode"
                           placeholder="Cod. Seg*"
-                          class="physicalPerson required"
                         />
                         <input
-                          type="text"
+                          type="month"
                           name="cardValidation-lp"
-                          id="cardValidation"
+                          id="cardValidation-lp"
+                          class="cardValidation"
                           placeholder="MM/AA"
-                          class="physicalPerson cardValidation required"
                         />
-
-                        <!-- <select
-                          id="cardValidation"
-                          class="cardValidation physicalPerson required"
-                        >
-                          <option value="">MM/AA</option>
-                        </select> -->
                       </div>
                       <div class="captchaBox">
                         <label for="captcha">Repita os números:</label>
                         <span>
                           <input
                             type="text"
-                            name="captcha"
-                            id="captchaCode"
-                            class="captchaCode physicalPerson required"
+                            id="captchaCode-lp"
+                            class="captchaCode"
                             placeholder="Captcha"
                           />
                           <img
@@ -381,8 +286,8 @@
                         <label for="term" class="termLabel">
                           <input
                             type="checkbox"
-                            class="checkboxInput physicalPerson required"
-                            name="term"
+                            class="checkboxInput"
+                            name="term-lp"
                             id="term-lp"
                           />
                           <span>
@@ -395,15 +300,191 @@
                           ></label
                         >
                         <!-- </div> -->
-                        <button
-                          type="button"
-                          class="formSubmitBtn"
-                          id="submit-button"
-                        >
+                        <button type="submit" class="formSubmitBtn">
                           MATRICULE-SE
                         </button>
                       </div>
                     </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <!-- Physical person -->
+            <form
+              method="POST"
+              id="physicalPersonForm"
+              style="margin-top: 20px"
+            >
+              <div class="partOne" style="margin-bottom: 50px">
+                <label for="name-pp">Nome</label>
+                <input type="text" id="name-pp" placeholder="Digite seu nome" />
+                <label for="emai-pp">E-mail</label>
+                <input
+                  type="emai"
+                  id="emai-pp"
+                  placeholder="Digite seu email"
+                />
+                <label for="rg-pp">RG</label>
+                <input type="text" id="rg-pp" placeholder="Informe seu RG" />
+                <label for="cpf-pp">CPF</label>
+                <input type="text" id="cpf-pp" placeholder="Informe seu CPF" />
+                <div class="responsiveSupport">
+                  <label for="telefone-pp">Telefone</label>
+                  <input
+                    type="text"
+                    id="telefone-pp"
+                    placeholder="(12) 99999-0000"
+                  />
+                  <label for="cep-pp" class="cepLabel"
+                    >CEP
+                    <input type="number" id="cep-pp" placeholder="Digite o CEP"
+                  /></label>
+                  <p class="getAddressWithCep">Completar endereço com CEP</p>
+                  <label for="address-pp" class="addressLabel"
+                    >Endereço
+                    <input
+                      type="text"
+                      id="address-pp"
+                      placeholder="Digite seu endereço"
+                  /></label>
+                  <label for="number-pp" class="numberLabel"
+                    >Número
+                    <input type="number" id="number-pp" placeholder="Número"
+                  /></label>
+                  <label for="neighborhood-pp" class="neighborhoodLabel"
+                    >Bairro
+                    <input
+                      type="text"
+                      id="neighborhood-pp"
+                      placeholder="Digite seu bairro"
+                  /></label>
+                  <label for="complement-pp" class="complementLabel"
+                    >Complemento
+                    <input
+                      type="text"
+                      id="complement-pp"
+                      placeholder="Apto, Bloco, Fundos"
+                  /></label>
+                  <label for="state-pp" class="stateLabel"
+                    >UF <input type="text" id="state-pp" placeholder="Estado"
+                  /></label>
+                  <label for="city-pp" class="cityLabel"
+                    >Cidade
+                    <input
+                      type="text"
+                      id="city-pp"
+                      placeholder="Digite sua cidade"
+                  /></label>
+                </div>
+              </div>
+              <div class="partTwo">
+                <p class="formTitle">
+                  <span
+                    class="mobileTitleNamber"
+                    data-form-fields="secundFields"
+                    >2</span
+                  >Escolha seu polo
+                </p>
+                <div class="selectBox">
+                  <select name="" class="formStateSelect" id="selectState-pp">
+                    <option value="" selected="true">UF</option>
+                  </select>
+                  <select name="" class="formSchoolSelect" id="selectSchool-pp">
+                    <option value="" selected="true">Polo</option>
+                  </select>
+                </div>
+              </div>
+              <div class="partThree">
+                <p class="formTitle">
+                  <span class="mobileTitleNamber" data-form-fields="thirdFields"
+                    >3</span
+                  >
+                  Como você prefere pagar?
+                </p>
+                <div class="partThreeFields">
+                  <div class="typOfPayment">
+                    <label for="creditCar-lp"
+                      ><img src="img/credit-card_image.png" alt="Image" />
+                      <input
+                        type="radio"
+                        name="payment-pp"
+                        value="creditCar-pp"
+                      />
+                    </label>
+                    <label for="pix-pp"
+                      ><img src="img/pix_image.png" alt="Image" />
+                      <input type="radio" name="payment-lp" value="pix-pp" />
+                    </label>
+                    <label for="ticket-lp"
+                      ><img src="img/ticket_image.png" alt="Image" />
+                      <input type="radio" name="payment-pp" value="ticket-pp" />
+                    </label>
+                  </div>
+                  <div class="formCreditCar">
+                    <input
+                      type="text"
+                      name="nameCard-pp"
+                      id="nameCard-pp"
+                      placeholder="Nome no cartão"
+                    />
+                    <input
+                      type="text"
+                      name="numberCard-pp"
+                      id="numberCard-pp"
+                      placeholder="Número do cartão*"
+                    />
+                    <input
+                      type="text"
+                      name="cardSafeCode-pp"
+                      id="cardSafeCode-pp"
+                      class="cardSafeCode"
+                      placeholder="Cod. Seg*"
+                    />
+                    <input
+                      type="month"
+                      name="cardValidation-pp"
+                      id="cardValidation-pp"
+                      class="cardValidation"
+                      placeholder="MM/AA"
+                    />
+                  </div>
+                  <div class="captchaBox">
+                    <label for="captcha">Repita os números:</label>
+                    <span>
+                      <input
+                        type="text"
+                        id="captchaCode-pp"
+                        class="captchaCode"
+                        placeholder="Captcha"
+                      />
+                      <img
+                        src="img/captcha_image.png"
+                        alt="Image"
+                        class="captchaImg"
+                      />
+                    </span>
+                  </div>
+                  <div class="termBtnBox">
+                    <!-- <div class="termPoliticBox"> -->
+                    <label for="term" class="termLabel">
+                      <input
+                        type="checkbox"
+                        class="checkboxInput"
+                        name="term"
+                        id="term-pp"
+                      /><span>
+                        Aceito os <a class="termPageLink">Termos do Aluno</a>
+                        <br />
+                        e
+                        <a class="politicPageLink">
+                          Políticas de Privacidade</a
+                        ></span
+                      ></label
+                    >
+                    <!-- </div> -->
+                    <button type="submit" class="formSubmitBtn">
+                      MATRICULE-SE
+                    </button>
                   </div>
                 </div>
               </div>
@@ -469,7 +550,7 @@
               </p>
               <img src="img/congratulation_image.png" alt="Image" />
             </div>
-            <div class="logoAddressBox infoInstituteColumnTwo">
+            <div class="logoAddressBox">
               <div class="logoAddressImg">
                 <img
                   src="https://catalogo.drmeducacao.com.br/loja/imagens/logo14202118512660.png"
