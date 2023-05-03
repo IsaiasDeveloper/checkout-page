@@ -27,7 +27,7 @@ body {
   background-color: var(--iceColor);
   /* background-color: var(--grayColor); */
   font-family: var(--defaultFont) !important;
-  padding-bottom: 250px;
+  padding-bottom: 340px;
 }
 
 /* Nav seciton */
@@ -167,11 +167,16 @@ form {
   margin-bottom: 30px;
 }
 label {
+  display: flex;
+  flex-direction: column;
   width: 100%;
+  height: auto;
   font-size: 13px;
   text-align: start;
   font-weight: 600;
   color: var(--grayColor);
+  /* margin-top: 15px; */
+  margin-top: 5px;
 }
 input {
   width: 100%;
@@ -181,7 +186,7 @@ input {
   border-radius: 5px;
   padding-left: 10px;
   height: 30px;
-  margin-bottom: 7px;
+  /* margin-bottom: 7px; */
   margin-top: 1px;
   outline: none;
 }
@@ -194,7 +199,7 @@ input::placeholder {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: end;
   justify-content: space-between;
 }
 
@@ -254,13 +259,29 @@ input::placeholder {
   justify-content: space-between;
   align-items: center;
 }
+.selectBox div {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.selectBox div + div {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
 .selectBox select {
+  width: 100%;
   height: 30px;
   color: var(--grayColor);
   font-family: var(--defaultFont) !important;
   border: 1px solid var(--cardsBarColor);
   border-radius: 5px;
   padding-left: 10px;
+  outline: none;
 }
 
 .formStateSelect {
@@ -271,7 +292,7 @@ input::placeholder {
 }
 .partThree {
   position: absolute;
-  bottom: -340px;
+  bottom: -365px;
   /* left: 44px; */
   left: 37px;
   right: 0;
@@ -335,13 +356,34 @@ input::placeholder {
   flex-wrap: wrap;
   justify-content: start;
   align-items: start;
+  /* row-gap: 10px; */
+}
+.formCreditCar input:not(:first-child) {
+  margin-top: 15px;
+}
+.formCreditCar div {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: end;
+}
+.formCreditCar span + span {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+}
+.formCreditCar div span {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
 }
 .cardSafeCode {
-  width: 40%;
+  width: 30%;
 }
 .cardValidation {
-  width: 35%;
-  margin-left: 40px;
+  width: 30%;
+  margin-left: 30px;
 }
 
 .captchaBox {
@@ -350,7 +392,12 @@ input::placeholder {
   flex-direction: column;
 }
 .captchaCode {
+  width: 100%;
+}
+.captchaBox span div {
   width: 60%;
+  display: flex;
+  flex-direction: column;
 }
 .captchaBox span {
   width: 100%;
@@ -371,10 +418,11 @@ input::placeholder {
 .termLabel {
   width: 43%;
   display: flex;
+  flex-direction: unset;
   justify-content: start;
   align-items: start;
   white-space: nowrap;
-  margin-right: 35px;
+  /* margin-right: 35px; */
 }
 .checkboxInput {
   width: 15px;
@@ -397,6 +445,8 @@ input::placeholder {
   color: var(--whiteColor);
   cursor: pointer;
   transition: all 500ms;
+  width: 45%;
+  white-space: nowrap;
 }
 
 .formSubmitBtn:hover {
@@ -635,6 +685,22 @@ input::placeholder {
 }
 .infoInstituteColumnOne {
   display: none;
+}
+.error-text {
+  height: 11px;
+  width: auto;
+  font-size: 11px;
+  font-weight: 500;
+  color: red;
+  display: block;
+  width: 100%;
+}
+.boxForNewFields {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
 }
 /* End of Form section */
 

@@ -1,217 +1,286 @@
-$(document).ready(function () {
-  // Esconder campos de Pessoa Jurídica
-  $('.corporateReason').hide();
-  $('.legalPersonOption .typeFormBoxText').addClass('selectedTitle');
-  $('.legalPersonOption').addClass('unselected').removeClass('selected');
+const LPLabel = document.querySelector('.legalPersonOption');
+const LPTitle = document.querySelector('.legalPersonOption .typeFormBoxText');
+const PPLabel = document.querySelector('.physicalPersonOption');
+const PPTitle = document.querySelector(
+  '.physicalPersonOption .typeFormBoxText',
+);
+const corporateReason = [...document.querySelectorAll('.corporateReason')];
+const errorMsgList = [...document.querySelectorAll('.error-text')];
+const corporateReasonGroup = [
+  ...document.querySelectorAll('.corporateReasonGroup'),
+];
+corporateReason.forEach((e) => (e.style.display = 'none'));
+for (let i = 0; i < corporateReason.length; i++) {}
 
-  // Mostrar campos correspondentes ao tipo de pessoa selecionado
-  $('.physicalPersonOption').click(function () {
-    $('.physicalPerson').show();
-    $('.corporateReason').show();
-    $('.legalPersonOption').addClass('selected').removeClass('unselected');
-    $('.physicalPersonOption').addClass('unselected').removeClass('selected');
-    $('.physicalPersonOption .typeFormBoxText').addClass('selectedTitle');
-    $('.legalPersonOption .typeFormBoxText').removeClass('selectedTitle');
-  });
+PPLabel.addEventListener('click', physicalPersonClick);
 
-  $('.legalPersonOption').click(function () {
-    $('.corporateReason').hide();
-    $('.physicalPerson').show();
-    $('.physicalPersonOption').addClass('selected').removeClass('unselected');
-    $('.legalPersonOption').addClass('unselected').removeClass('selected');
-    $('.legalPersonOption .typeFormBoxText').addClass('selectedTitle');
-    $('.physicalPersonOption .typeFormBoxText').removeClass('selectedTitle');
-  });
+LPLabel.addEventListener('click', () => {
+  corporateReason.forEach((e) => (e.style.display = 'flex'));
+  // const recipientBox = document.querySelector('.partOne');
+  // if (recipientBox.classList.contains('boxForNewFields'))
+  //   document.querySelector('.boxForNewFields').remove();
 
-  // Validar formulário ao ser enviado
-  $('form').submit(function (event) {
-    if ($('.physicalPersonOption').hasClass('selected')) {
-      // Validar campos de Pessoa Física
-      if (
-        !$('#name').val() ||
-        !$('#cpf').val() ||
-        !$('#email').val() ||
-        !$('#rg').val() ||
-        !$('#telefone').val()
-      ) {
-        event.preventDefault();
-        alert('Por favor, preencha todos os campos obrigatórios.');
-      }
-    } else if ($('.legalPersonOption').hasClass('selected')) {
-      // Validar campos de Pessoa Jurídica
-      if (
-        !$('#corporateReason').val() ||
-        !$('#cnpj').val() ||
-        !$('#stateRegistration').val() ||
-        !$('#fantasyName').val()
-      ) {
-        event.preventDefault();
-        alert('Por favor, preencha todos os campos obrigatórios.');
-      }
-    }
-  });
+  corporateFields();
+  LPTitle.classList.add('selectedTitle');
+  PPTitle.classList.remove('selectedTitle');
+  LPLabel.classList.add('unselected');
+  PPLabel.classList.remove('unselected');
+  errorMsgList.forEach((e) => e.remove());
+});
 
-  //Search address
-  // Função para buscar os dados do CEP
-  function searcheAddress(cep) {
-    // Faz uma requisição AJAX para o serviço ViaCEP
-    $.ajax({
-      url: 'https://viacep.com.br/ws/' + cep + '/json/',
-      type: 'GET',
-      dataType: 'json',
-      success: function (dados) {
-        // Preenche os campos do formulário com os dados do CEP
-        $('#address').val(dados.logradouro);
-        $('#neighborhood').val(dados.bairro);
-        $('#city').val(dados.localidade);
-        $('#state').val(dados.uf);
-      },
-      error: function () {
-        alert('Não foi possível buscar os dados do CEP.');
-      },
+function physicalPersonClick() {
+  const recipientBox = document.querySelector('.partOne');
+  let boxForNewFields = document.querySelector('.boxForNewFields');
+  if (boxForNewFields) {
+    boxForNewFields.remove();
+  }
+
+  corporateReason.forEach((e) => (e.style.display = 'none'));
+  corporateReasonGroup.forEach((e) => (e.style.display = 'none'));
+  PPTitle.classList.add('selectedTitle');
+  LPTitle.classList.remove('selectedTitle');
+  PPLabel.classList.add('unselected');
+  LPLabel.classList.remove('unselected');
+  errorMsgList.forEach((e) => (e.innerHTML = ''));
+}
+
+class formValidation {
+  constructor() {
+    this.form = document.querySelector('.form');
+    this.formEvents();
+  }
+
+  formEvents() {
+    this.form.addEventListener('submit', (e) => {
+      this.handleSibmit(e);
     });
   }
 
-  // Evento de mudança do campo CEP
-  $('#cep').change(function () {
-    var cep = $(this).val().replace(/\D/g, '');
-    if (cep.length == 8) {
-      searcheAddress(cep);
-    } else {
-      alert('CEP inválido.');
-    }
-  });
+  handleSibmit(e) {
+    e.preventDefault();
+    const validateFields = this.valitationFields();
 
-  // Adiciona evento de clique na classe "getAddressWithCep"
-  $('.getAddressWithCep').click(function () {
-    var cep = $('#cep').val(); // obtém o valor do campo de CEP
-    searcheAddress(cep); // chama a função que busca o endereço
-  });
-
-  //Validation form
-  function validateFields() {
-    var isValid = true;
-
-    if ($('.physicalPersonOption').hasClass('selected')) {
-      // Validar campos de Pessoa Física
-      if (
-        !$('#name').val() ||
-        !$('#cpf').val() ||
-        !$('#email').val() ||
-        !$('#rg').val() ||
-        !$('#telefone').val()
-      ) {
-        // Exibe mensagem de erro ao usuário
-        $('.pessoa-fisica input[required]').each(function () {
-          if (!$(this).val()) {
-            $(this).addClass('invalid');
-          }
-        });
-
-        isValid = false;
-      }
-    } else if ($('.legalPersonOption').hasClass('selected')) {
-      // Validar campos de Pessoa Jurídica
-      if (
-        !$('#corporateReason').val() ||
-        !$('#cnpj').val() ||
-        !$('#stateRegistration').val() ||
-        !$('#fantasyName').val()
-      ) {
-        // Exibe mensagem de erro ao usuário
-        $('.pessoa-juridica input[required]').each(function () {
-          if (!$(this).val()) {
-            $(this).addClass('invalid');
-          }
-        });
-
-        isValid = false;
-      }
-    }
-
-    return isValid;
+    if (validateFields) this.form.submit();
   }
 
-  //Send button
-  // Validar formulário ao ser enviado
-  $('#submit-button').click(function (event) {
-    if ($('.physicalPersonOption').hasClass('selected')) {
-      // Validar campos de Pessoa Física
-      if (
-        !$('#name').val() ||
-        !$('#cpf').val() ||
-        !$('#email').val() ||
-        !$('#rg').val() ||
-        !$('#telefone').val() ||
-        !$('#cep').val() ||
-        !$('#address').val() ||
-        !$('#number').val() ||
-        !$('#neighborhood').val() ||
-        !$('#state').val() ||
-        !$('#city').val()
-      ) {
-        event.preventDefault();
-        $('.form-field:invalid').addClass('invalid-field');
-        $('#name').css('border-color', 'red').addClass('form-field');
-        $('#cpf').css('border-color', 'red').addClass('form-field');
-        $('#email').css('border-color', 'red').addClass('form-field');
-        $('#rg').css('border-color', 'red').addClass('form-field');
-        $('#telefone').css('border-color', 'red').addClass('form-field');
-        $('#cep').css('border-color', 'red').addClass('form-field');
-        $('#address').css('border-color', 'red').addClass('form-field');
-        $('#number').css('border-color', 'red').addClass('form-field');
-        $('#neighborhood').css('border-color', 'red').addClass('form-field');
-        $('#state').css('border-color', 'red').addClass('form-field');
-        $('#city').css('border-color', 'red').addClass('form-field');
-      } else {
-        $('.form-field').each(function () {
-          if ($(this).val()) {
-            $(this).css('border-color', '');
-          }
-        });
+  valitationFields() {
+    let valid = true;
+    for (let erroText of this.form.querySelectorAll('.error-text')) {
+      erroText.remove();
+    }
+
+    for (let field of this.form.querySelectorAll('.required')) {
+      const label =
+        field.previousElementSibling && field.previousElementSibling.innerText;
+
+      if (!field.value) {
+        if (label === null) {
+          this.createError(field, `Inválido!`);
+        } else {
+          this.createError(field, `${label} não poder estar em branco!`);
+        }
+
+        valid = false;
       }
-    } else if ($('.legalPersonOption').hasClass('selected')) {
-      // Validar campos de Pessoa Jurídica
-      if (
-        !$('#corporateReason').val() ||
-        !$('#cnpj').val() ||
-        !$('#stateRegistration').val() ||
-        !$('#fantasyName').val()
-      ) {
-        event.preventDefault();
-        $('.form-field:invalid').addClass('invalid-field');
-        $('#corporateReason').css('border-color', 'red').addClass('form-field');
-        $('#cnpj').css('border-color', 'red').addClass('form-field');
-        $('#stateRegistration')
-          .css('border-color', 'red')
-          .addClass('form-field');
-        $('#fantasyName').css('border-color', 'red').addClass('form-field');
-      } else {
-        $('.form-field').each(function () {
-          if ($(this).val()) {
-            $(this).css('border-color', '');
-          }
-        });
+
+      // if (field.classList.contains('corporateName')) {
+      //   if (!this.validateCorporateReason(field)) return valid;
+      // }
+
+      if (field.classList.contains('cnpj')) {
+        if (!this.validarCNPJ(field)) return valid;
+      }
+
+      // if (field.classList.contains('name')) {
+      //   if (!this.validateName(field)) return valid;
+      // }
+
+      if (field.classList.contains('cpf')) {
+        if (!this.validaCPF(field)) return valid;
+      }
+
+      if (field.classList.contains('rg')) {
+        if (!this.validateRG(field)) return valid;
       }
     }
-  });
 
-  // Validar campos ao perder o foco
-  $(
-    '#name, #cpf, #email, #rg, #telefone, #corporateReason, #cnpj, #stateRegistration, #fantasyName, #cep'
-  ).blur(function () {
-    validateFields($(this));
-  });
+    return valid;
+  }
+  // validateCorporateReason(field) {
+  //   const corporateReason = field.value;
+  //   let valid = true;
+  //   if (corporateReason.length < 6) {
+  //     this.createError(field, 'Razão social precisa ter mais de 5 caracteres');
+  //     valid = false;
+  //   }
+  //   // return valid;
+  // }
 
-  //Change validation card
-  $('#cardValidation').on('blur', function () {
-    var data = $(this).val();
-    var regex = /^(0[1-9]|1[0-2])\/([0-9]{2})$/; // Expressão regular para validação da data
+  // validateName(field) {
+  //   // let name = document.querySelector('.name').value;
+  //   const corporateReason = field.value;
+  //   let valid = true;
+  //   const nameRegex = /^[a-zA-ZÀ-ÿ]+(([',. -][a-zA-ZÀ-ÿ ])?[a-zA-ZÀ-ÿ]*)*$/;
+  //   if (name.length < 5 || !nameRegex.test(name)) {
+  //     this.createError(field, 'Nome invalido.');
+  //     valid = false;
+  //   }
+  // }
 
-    if (!regex.test(data)) {
-      $(this).css('border-color', 'red');
+  validateRG(field) {
+    let rgInput = document.getElementById('rg').value;
+    let rg = rgInput.replace(/\D/g, '');
+    if (rg.length < 6) {
+      this.createError(field, 'O RG deve ter mais de 6 dígitos');
+      return false;
+    }
+    const formattedValue = rg.replace(
+      /^(\d{2})(\d{3})(\d{3})(\d{1})$/,
+      '$1.$2.$3-$4',
+    );
+    document.getElementById('rg').value = formattedValue;
+    return true;
+  }
+
+  validaCPF(field) {
+    const cpf = new ValidaCPF(field.value);
+    if (!cpf.valida()) {
+      this.createError(field, 'CPF inválido.');
+      return false;
+    }
+  }
+
+  validarCNPJ(field) {
+    let cnpjInput = document.getElementById('cnpj').value;
+
+    let cnpj = cnpjInput.replace(/[^\d]+/g, ''); // Remove tudo o que não é dígito
+    if (cnpj.length != 14) {
+      this.createError(field, 'O CNPJ deve ter 14 digitos');
+      return false; // O CNPJ deve ter 14 dígitos
+    }
+    // Verifica se todos os dígitos são iguais (ex.: 00000000000000)
+    if (/^(\d)\1+$/.test(cnpj)) {
+      this.createError(field, 'Não pode ser digitos repetidos');
+      return false;
+    }
+    // Valida primeiro dígito verificador
+    let soma = 0;
+    let peso = 5;
+    for (let i = 0; i < 12; i++) {
+      soma += parseInt(cnpj.charAt(i)) * peso--;
+      if (peso < 2) peso = 9;
+    }
+    let digito = 11 - (soma % 11);
+    if (digito > 9) digito = 0;
+    if (parseInt(cnpj.charAt(12)) != digito) {
+      this.createError(field, 'Primiero digito verificador errado');
+      return false;
+    }
+    // Valida segundo dígito verificador
+    soma = 0;
+    peso = 6;
+    for (let i = 0; i < 13; i++) {
+      soma += parseInt(cnpj.charAt(i)) * peso--;
+      if (peso < 2) peso = 9;
+    }
+    digito = 11 - (soma % 11);
+    if (digito > 9) digito = 0;
+    if (parseInt(cnpj.charAt(13)) != digito) {
+      this.createError(field, 'CNPJ inválido');
+      return false;
+    }
+    return true; // CNPJ válido
+  }
+
+  createError(field, msg) {
+    const span = document.createElement('span');
+    span.innerHTML = msg;
+    span.classList.add('error-text');
+    field.insertAdjacentElement('afterend', span);
+  }
+}
+
+//Search address
+function searcheAddress(cep) {
+  let cepInput = document.getElementById('cep');
+  const xhr = new XMLHttpRequest();
+  const url = 'https://viacep.com.br/ws/' + cep + '/json/';
+  xhr.open('GET', url, true);
+
+  xhr.onload = function () {
+    if (xhr.readyState === xhr.DONE && xhr.status === 200) {
+      const dados = JSON.parse(xhr.responseText);
+
+      document.getElementById('address').value = dados.logradouro;
+      document.getElementById('neighborhood').value = dados.bairro;
+      document.getElementById('city').value = dados.localidade;
+      document.getElementById('state').value = dados.uf;
     } else {
-      $(this).css('border-color', '');
+      const span = document.createElement('span');
+      span.innerHTML = 'CEP Inválido!';
+      span.classList.add('error-text');
+      cepInput.insertAdjacentElement('afterend', span);
+      return;
     }
-  });
+  };
+
+  xhr.send();
+}
+
+document.querySelector('.getAddressWithCep').addEventListener('click', () => {
+  let cepInput = document.getElementById('cep');
+  let cepLabel = document.querySelector('.cepLabel');
+  let errorMsg = cepLabel.querySelector('.error-text');
+  if (errorMsg) errorMsg.remove();
+
+  const rawValue = cepInput.value.replace(/[^\d]/g, '');
+  const formattedValue = rawValue.replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2-$3');
+  cepInput.value = formattedValue;
+
+  if (cepInput.value.length <= 8) {
+    const span = document.createElement('span');
+    span.innerHTML = 'CEP Inválido!';
+    span.classList.add('error-text');
+    cepInput.insertAdjacentElement('afterend', span);
+    return;
+  }
+
+  let cep = rawValue;
+  searcheAddress(cep);
 });
+//Validate RG
+
+//Create corporate fields
+function corporateFields() {
+  let boxForNewFields = document.querySelector('.boxForNewFields');
+  if (boxForNewFields) {
+    boxForNewFields.remove();
+  }
+  let newFields = `<div class="corporateReasonGroup">
+  <label for="corporateReason" class="corporateReason">Razão social</label>
+  <input type="text" name="corporateReason" id="corporateReason" class="corporateReason required corporateName" placeholder="Digita a razão social*">
+</div>
+<div class="corporateReasonGroup"">
+  <label for="fantasyName" class="corporateReason">Nome fantasia</label>
+  <input type="text" name="fantasyName" id="fantasyName" class="corporateReason required" placeholder="Digite o nome fantasia*">
+</div>
+
+<div class="corporateReasonGroup"">
+  <label for="cnpj" class="corporateReason">CNPJ</label>
+  <input type="text" name="cnpj" id="cnpj" class="corporateReason required cnpj" placeholder="Digite o CNPJ*">
+</div>
+<div class="corporateReasonGroup">
+  <label for="stateRegistration" class="corporateReason">Inscrição estadual</label>
+  <input type="text" id="stateRegistration" class="corporateReason required" name="stateRegistration" placeholder="Digite a inscrição Estadual*">
+</div>`;
+  const recipientBox = document.querySelector('.partOne');
+  boxForNewFields = document.createElement('div');
+
+  boxForNewFields.classList.add('boxForNewFields');
+  boxForNewFields.innerHTML = newFields;
+  recipientBox.prepend(boxForNewFields);
+}
+
+const validate = new formValidation();
+
+physicalPersonClick();
