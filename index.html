@@ -98,7 +98,7 @@
               </div>
             </div>
             <!-- Legal person -->
-            <form method="POST" id="legalPersonForm" class="form">
+            <div id="legalPersonForm" class="form">
               <div class="partOne">
                 <label for="name">Nome</label>
                 <input
@@ -110,9 +110,9 @@
                 />
                 <label for="email">E-mail</label>
                 <input
-                  type="emai"
+                  type="email"
                   name="email"
-                  class="physicalPerson required"
+                  class="physicalPerson required email"
                   id="email"
                   placeholder="Digite seu email"
                 />
@@ -132,6 +132,7 @@
                   class="physicalPerson cpf required"
                   id="cpf"
                   placeholder="Informe seu CPF"
+                  maxlength="11"
                 />
                 <div class="responsiveSupport">
                   <label for="telefone">Telefone</label>
@@ -139,8 +140,9 @@
                     type="text"
                     name="telefone"
                     id="telefone"
-                    class="physicalPerson required"
+                    class="physicalPerson required telefone"
                     placeholder="(12) 99999-0000"
+                    maxlength="11"
                   />
                   <label for="cep" class="cepLabel"
                     >CEP
@@ -228,6 +230,9 @@
                       id="selectState-lp"
                     >
                       <option value="" selected="true">UF</option>
+                      <option value="SP">SP</option>
+                      <option value="MT">MT</option>
+                      <option value="MG">MG</option>
                     </select>
                   </div>
                   <div>
@@ -237,6 +242,13 @@
                       id="selectSchool-lp"
                     >
                       <option value="" selected="true">Polo</option>
+                      <option value="Varzea Paulista-SP">
+                        Varzea Paulista-SP
+                      </option>
+                      <option value="Mazaré-MT">Mazaré-MT</option>
+                      <option value="Belo Horizonte-MG">
+                        Belo Horizonte-MG
+                      </option>
                     </select>
                   </div>
                 </div>
@@ -269,74 +281,47 @@
                     <div class="partThreeFields">
                       <div class="typOfPayment">
                         <label for="creditCar"
-                          ><img src="img/credit-card_image.png" alt="Image" />
+                          ><img
+                            class="creditCar-img"
+                            src="img/credit-card_image.png"
+                            alt="Image"
+                          />
                           <input
                             type="radio"
                             name="payment"
                             value="creditCar"
                             id="creditCar"
-                            class="required required"
+                            class="physicalPerson required inputRadio"
                           />
                         </label>
                         <label for="pix"
-                          ><img src="img/pix_image.png" alt="Image" />
+                          ><img
+                            class="pix-img"
+                            src="img/pix_image.png"
+                            alt="Image"
+                          />
                           <input
                             type="radio"
                             name="payment"
                             id="pix"
                             value="pix"
-                            class="physicalPerson required"
+                            class="physicalPerson required inputRadio"
                           />
                         </label>
                         <label for="ticket"
-                          ><img src="img/ticket_image.png" alt="Image" />
+                          ><img
+                            class="ticket-img"
+                            src="img/ticket_image.png"
+                            alt="Image"
+                          />
                           <input
                             type="radio"
                             name="payment"
                             value="ticket"
                             id="ticket"
-                            class="physicalPerson required"
+                            class="physicalPerson required inputRadio"
                           />
                         </label>
-                      </div>
-                      <div class="formCreditCar">
-                        <input
-                          type="text"
-                          name="nameCard-lp"
-                          id="nameCard"
-                          placeholder="Nome no cartão"
-                          class="physicalPerson"
-                        />
-                        <!-- <label for="numberCard" style="display: none"
-                          >Número do cartão</label
-                        > -->
-                        <input
-                          type="text"
-                          name="numberCard-lp"
-                          id="numberCard"
-                          placeholder="Número do cartão*"
-                          class="physicalPerson"
-                        />
-                        <!-- <div> -->
-                        <!-- <span class=""> -->
-                        <input
-                          type="text"
-                          name="cardSafeCode-lp"
-                          id="cardSafeCode"
-                          placeholder="Cod. Seg*"
-                          class="physicalPerson cardSafeCode"
-                        />
-                        <!-- </span> -->
-                        <!-- <span> -->
-                        <input
-                          type="text"
-                          name="cardValidation-lp"
-                          id="cardValidation"
-                          placeholder="MM/AA"
-                          class="physicalPerson cardValidation"
-                        />
-                        <!-- </span> -->
-                        <!-- </div> -->
                       </div>
                       <div class="captchaBox">
                         <label for="captcha">Repita os números:</label>
@@ -378,7 +363,7 @@
                         >
                         <!-- </div> -->
                         <button
-                          type="submit"
+                          type="button"
                           class="formSubmitBtn"
                           id="submit-button"
                         >
@@ -389,7 +374,7 @@
                   </div>
                 </div>
               </div>
-            </form>
+            </div>
           </div>
         </div>
         <!-- Secund column -->

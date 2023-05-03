@@ -292,7 +292,7 @@ input::placeholder {
 }
 .partThree {
   position: absolute;
-  bottom: -365px;
+  bottom: -333px;
   /* left: 44px; */
   left: 37px;
   right: 0;
@@ -328,6 +328,7 @@ input::placeholder {
 }
 .typOfPayment {
   width: 48%;
+  height: 120px;
   display: flex;
   justify-content: start;
   align-items: center;
@@ -339,8 +340,14 @@ input::placeholder {
   align-items: center;
   cursor: pointer;
 }
-.typOfPayment img {
-  width: 110px;
+.creditCar-img {
+  width: 65px;
+}
+.pix-img {
+  width: 120px;
+}
+.ticket-img {
+  width: 70px;
 }
 .typOfPayment input[type='radio'] {
   width: 15px;
@@ -790,11 +797,20 @@ input::placeholder {
   }
   .typOfPayment {
     justify-content: space-between;
+    align-items: end;
   }
   .typOfPayment label {
     width: 25%;
   }
-  .typOfPayment img {
+  .creditCar-img {
+    max-width: 55%;
+    width: 100%;
+  }
+  .pix-img {
+    width: 100%;
+  }
+  .ticket-img {
+    max-width: 60%;
     width: 100%;
   }
   .termLabel {
