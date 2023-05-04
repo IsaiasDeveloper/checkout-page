@@ -119,12 +119,12 @@ function sendForm() {
           if (field.classList.contains('numberCard')) {
             if (!validateNumberCard(field)) return valid;
           }
+          if (field.classList.contains('cardValidation')) {
+            if (!validateCardValidation(field)) return valid;
+          }
           if (field.classList.contains('cardSafeCode')) {
             if (!validateSecurityCode(field)) return valid;
           }
-          // if (field.classList.contains('cardValidation')) {
-          //   if (!validateCardValidation(field)) return valid;
-          // }
         }
       }
     }
@@ -359,27 +359,66 @@ function sendForm() {
     return true;
   }
 
+  function validateCardValidation(field) {
+    const cardValidation = field.value;
+    console.log(cardValidation);
+    const rawValue = cardValidation.replace(/\D/g, '');
+    const month = parseInt(rawValue.slice(0, 2));
+    const year = parseInt(rawValue.slice(2));
+    const currentYear = new Date().getFullYear() % 100;
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth() + 1;
+
+    if (!/^\d+$/.test(rawValue)) {
+      createError(field, 'Apenas números.');
+      return false;
+    }
+    if (rawValue.length < 4) {
+      createError(field, 'Precisa de 4 dígitos para representar mês e ano');
+      return false;
+    }
+
+    if (month < 1 || month > 12) {
+      createError(field, 'Mês inválido.');
+      return false;
+    }
+
+    if (year < 0 || year > 99) {
+      createError(field, 'Ano inválido.');
+      return false;
+    }
+    if (year < currentYear) {
+      createError(field, 'Ano menor que ano atual.');
+      return false;
+    }
+
+    if (month < currentMonth && year === currentYear) {
+      createError(field, 'Validade expirada.');
+      return false;
+    }
+
+    const formattedValue = rawValue.replace(/(\d{2})(\d{0,2})/, '$1/$2');
+    document.getElementById('cardValidation').value = formattedValue;
+    return true;
+  }
+
   function validateSecurityCode(field) {
     const securityCode = field.value;
     const cardNumber = document.getElementById('numberCard').value;
-
     const onlyNumbers = cardNumber.replace(/\s/g, '');
-
-    console.log(onlyNumbers);
 
     // Verifica se o código de segurança possui 3 ou 4 dígitos
     if (!/^\d{3,4}$/.test(securityCode)) {
-      createError(field, 'Número deve ter entre 3 e 4 dígitos.');
+      createError(field, 'O CVV deve ter de 3 a 4 dígitos.');
       return false;
     }
-    /*
-Parece que a validação do código de segurança do cartão não está passando, preciso dar continuidade a
-partir daqui
-*/
-    // Verifica se o código de segurança corresponde aos últimos 3 ou 4 dígitos do número do cartão
-    const lastDigits = onlyNumbers.slice(-4);
-    if (lastDigits !== securityCode && lastDigits.slice(-3) !== securityCode) {
-      createError(field, 'Código inválido.');
+    // Verificar se o código de segurança do cartão é válido
+    const cvvLength =
+      onlyNumbers.startsWith('34') || onlyNumbers.startsWith('37') ? 4 : 3;
+    const cvvRegex = new RegExp(`^[0-9]{${cvvLength}}$`);
+    if (!cvvRegex.test(securityCode)) {
+      console.log('dentro do IF: ' + !cvvRegex.test(securityCode));
+      createError(field, 'Código inválido para este cartão.');
       return false;
     }
 
@@ -395,6 +434,7 @@ partir daqui
   }
 
   valitationFields();
+  document.querySelector('.getAddressWithCep').click();
 }
 
 //Search address
@@ -501,17 +541,18 @@ function createCredtCardFilelds() {
 />
 <input
   type="text"
+  name="cardValidation-lp"
+  id="cardValidation"
+  placeholder="MM/AA"
+  maxlength="4"
+  class="physicalPerson cardValidation requiredCreditCar"
+/>
+<input
+  type="text"
   name="cardSafeCode-lp"
   id="cardSafeCode"
   placeholder="Cod. Seg*"
   class="physicalPerson cardSafeCode requiredCreditCar"
-/>
-<input
-  type="text"
-  name="cardValidation-lp"
-  id="cardValidation"
-  placeholder="MM/AA"
-  class="physicalPerson cardValidation requiredCreditCar"
 />`;
   boxForNewFields = document.createElement('div');
   boxForNewFields.classList.add('formCreditCar');

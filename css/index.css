@@ -387,10 +387,10 @@ input::placeholder {
 }
 .cardSafeCode {
   width: 30%;
+  margin-left: 30px;
 }
 .cardValidation {
-  width: 30%;
-  margin-left: 30px;
+  width: 23%;
 }
 
 .captchaBox {
