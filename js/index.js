@@ -116,6 +116,9 @@ function sendForm() {
         for (let field of creditCardFields.querySelectorAll(
           '.requiredCreditCar',
         )) {
+          if (field.classList.contains('cardName')) {
+            if (!validateNameCard(field)) return valid;
+          }
           if (field.classList.contains('numberCard')) {
             if (!validateNumberCard(field)) return valid;
           }
@@ -131,310 +134,306 @@ function sendForm() {
     return valid;
   }
 
-  function validateCorporateReason(field) {
-    const corporateReason = field.value;
-    let valid = true;
-    if (corporateReason.length < 6) {
-      createError(field, 'Razão social precisa ter mais de 5 caracteres');
-      valid = false;
-    }
-    return valid;
-  }
-
-  function validateStateRegistration(field) {
-    const stateRegistration = field.value;
-    const regex = /^[0-9.-]+$/;
-    if (!regex.test(stateRegistration)) {
-      createError(field, 'Deve conter apenas número');
-      return false;
-    }
-    return true;
-  }
-
-  function validateCNPJ(field) {
-    // let cnpjInput = document.getElementById('cnpj').value;
-    let cnpjInput = field.value;
-    let cnpj = cnpjInput.replace(/[^\d]+/g, ''); // Remove tudo o que não é dígito
-    if (cnpj.length != 14) {
-      createError(field, 'O CNPJ deve ter 14 digitos');
-      return false; // O CNPJ deve ter 14 dígitos
-    }
-    // Verifica se todos os dígitos são iguais (ex.: 00000000000000)
-    if (/^(\d)\1+$/.test(cnpj)) {
-      createError(field, 'Não pode ser digitos repetidos');
-      return false;
-    }
-    // Valida primeiro dígito verificador
-    let soma = 0;
-    let peso = 5;
-    for (let i = 0; i < 12; i++) {
-      soma += parseInt(cnpj.charAt(i)) * peso--;
-      if (peso < 2) peso = 9;
-    }
-    let digito = 11 - (soma % 11);
-    if (digito > 9) digito = 0;
-    if (parseInt(cnpj.charAt(12)) != digito) {
-      createError(field, 'Primiero digito verificador errado');
-      return false;
-    }
-    // Valida segundo dígito verificador
-    soma = 0;
-    peso = 6;
-    for (let i = 0; i < 13; i++) {
-      soma += parseInt(cnpj.charAt(i)) * peso--;
-      if (peso < 2) peso = 9;
-    }
-    digito = 11 - (soma % 11);
-    if (digito > 9) digito = 0;
-    if (parseInt(cnpj.charAt(13)) != digito) {
-      createError(field, 'CNPJ inválido');
-      return false;
-    }
-    const cnpjFormatado = cnpj.replace(
-      /(\d{2})\.?(\d{3})\.?(\d{3})\/?(\d{4})\-?(\d{2})/,
-      '$1.$2.$3/$4-$5',
-    );
-    document.getElementById('cnpj').value = cnpjFormatado;
-    return true; // CNPJ válido
-  }
-
-  function validateName(field) {
-    // let name = document.querySelector('.name').value;
-    const corporateReason = field.value;
-    let valid = true;
-    const nameRegex = /^[a-zA-ZÀ-ÿ]+(([',. -][a-zA-ZÀ-ÿ ])?[a-zA-ZÀ-ÿ]*)*$/;
-    if (corporateReason.length < 5 || !nameRegex.test(corporateReason)) {
-      createError(field, 'Nome invalido.');
-      valid = false;
-      return false;
-    }
-    return true;
-  }
-
-  function validateEmail(field) {
-    const email = field.value;
-    let valid = true;
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!regex.test(email)) {
-      createError(field, 'Email inválido');
-      valid = false;
-    }
-    return true;
-  }
-
-  function validateRG(field) {
-    // let rgInput = document.getElementById('rg').value;
-    const rgInput = field.value;
-    let rg = rgInput.replace(/\D/g, '');
-    if (rg.length < 6) {
-      createError(field, 'O RG deve ter mais de 6 dígitos');
-      valid = false;
-      return false;
-    }
-    const formattedValue = rg.replace(
-      /^(\d{2})(\d{3})(\d{3})(\d{1})$/,
-      '$1.$2.$3-$4',
-    );
-    document.getElementById('rg').value = formattedValue;
-    return true;
-  }
-
-  function validateCPF(field) {
-    const cpf = new ValidaCPF(field.value);
-    if (!cpf.valida()) {
-      createError(field, 'CPF inválido.');
-      return false;
-    }
-    let cpfInput = document.getElementById('cpf').value;
-    const regex = /^(\d{3})(\d{3})(\d{3})(\d{2})$/;
-    const cpfFormatado = cpfInput.replace(regex, '$1.$2.$3-$4');
-    document.getElementById('cpf').value = cpfFormatado;
-    return true;
-  }
-
-  function validatePhoneNumber(field) {
-    const phoneNumber = field.value.replace(/\D/g, ''); // Remove tudo que não é dígito
-    if (/[^\d\s()-]/.test(field.value)) {
-      // Verifica se há letras
-      createError(field, 'Número inválido.');
-      return false;
-    }
-    const ddd = phoneNumber.substring(0, 2);
-    const bodyPhone = phoneNumber.substring(2, phoneNumber.length);
-    let phoneFormated;
-    if (bodyPhone.length === 9) {
-      // Celular
-      phoneFormated = bodyPhone.replace(/^(\d{5})(\d{4})/, '$1-$2');
-    } else if (bodyPhone.length === 8) {
-      // Telefone fixo
-      phoneFormated = bodyPhone.replace(/^(\d{4})(\d{4})/, '$1-$2');
-    } else {
-      // Tamanho inválido
-      createError(field, 'Número precisa conter de 8 a 9 dígitos + o DDD.');
-      return false;
-    }
-    document.getElementById('telefone').value = `(${ddd}) ${phoneFormated}`;
-    return true;
-  }
-
-  function validateSelects(field) {
-    // const ufValue = ufSelect.value;
-    // const poloValue = poloSelect.value;
-    const ufValue = field.value;
-    const poloValue = field.value;
-
-    if (ufValue === '') {
-      // createError(ufValue, 'Selecione o estado do Polo.');
-      return false;
-    }
-    if (poloValue === '') {
-      // createError(poloValue, 'Selecione a cidade do Polo.');
-      return false;
-    }
-
-    return true;
-  }
-
-  function valedateInputRadio(field) {
-    let isValid = false;
-    const requiredRadios = document.querySelectorAll(
-      'input[type="radio"].required',
-    );
-    requiredRadios.forEach((radio) => {
-      if (radio.checked) {
-        field.value;
-        isValid = true;
-      }
-    });
-
-    if (!isValid) {
-      createError(field, 'Selecione uma das opções.');
-      return false;
-    }
-    return true;
-  }
-
-  function validateNumberCard(field) {
-    const numberInput = field.value;
-    const onlyNumbers = numberInput.replace(/\D/g, '');
-
-    // Verifica se o campo possui apenas números
-    if (!/^\d+$/.test(onlyNumbers)) {
-      createError(field, 'Número inválido.');
-      return false;
-    }
-
-    if (numberInput.length < 12 || numberInput.length > 19) {
-      createError(field, 'Precisa ter entre 13 e 19 dígitos');
-      return false;
-    }
-    // Realiza a validação do número do cartão
-    let sum = 0;
-    let double = false;
-
-    for (let i = onlyNumbers.length - 1; i >= 0; i--) {
-      const digit = parseInt(onlyNumbers.charAt(i));
-
-      if (double) {
-        if (digit * 2 > 9) {
-          sum += digit * 2 - 9;
-        } else {
-          sum += digit * 2;
-        }
-      } else {
-        sum += digit;
-      }
-
-      double = !double;
-    }
-    // sum % 10 === 0;
-    if (sum % 10 !== 0) {
-      createError(field, 'Número inválido.');
-      return false;
-    }
-    const regex = /(\d{4})(\d{4})(\d{4})(\d{4})/;
-    const formattedNumber = onlyNumbers.replace(regex, '$1 $2 $3 $4');
-    document.getElementById('numberCard').value = formattedNumber;
-
-    return true;
-  }
-
-  function validateCardValidation(field) {
-    const cardValidation = field.value;
-    console.log(cardValidation);
-    const rawValue = cardValidation.replace(/\D/g, '');
-    const month = parseInt(rawValue.slice(0, 2));
-    const year = parseInt(rawValue.slice(2));
-    const currentYear = new Date().getFullYear() % 100;
-    const currentDate = new Date();
-    const currentMonth = currentDate.getMonth() + 1;
-
-    if (!/^\d+$/.test(rawValue)) {
-      createError(field, 'Apenas números.');
-      return false;
-    }
-    if (rawValue.length < 4) {
-      createError(field, 'Precisa de 4 dígitos para representar mês e ano');
-      return false;
-    }
-
-    if (month < 1 || month > 12) {
-      createError(field, 'Mês inválido.');
-      return false;
-    }
-
-    if (year < 0 || year > 99) {
-      createError(field, 'Ano inválido.');
-      return false;
-    }
-    if (year < currentYear) {
-      createError(field, 'Ano menor que ano atual.');
-      return false;
-    }
-
-    if (month < currentMonth && year === currentYear) {
-      createError(field, 'Validade expirada.');
-      return false;
-    }
-
-    const formattedValue = rawValue.replace(/(\d{2})(\d{0,2})/, '$1/$2');
-    document.getElementById('cardValidation').value = formattedValue;
-    return true;
-  }
-
-  function validateSecurityCode(field) {
-    const securityCode = field.value;
-    const cardNumber = document.getElementById('numberCard').value;
-    const onlyNumbers = cardNumber.replace(/\s/g, '');
-
-    // Verifica se o código de segurança possui 3 ou 4 dígitos
-    if (!/^\d{3,4}$/.test(securityCode)) {
-      createError(field, 'O CVV deve ter de 3 a 4 dígitos.');
-      return false;
-    }
-    // Verificar se o código de segurança do cartão é válido
-    const cvvLength =
-      onlyNumbers.startsWith('34') || onlyNumbers.startsWith('37') ? 4 : 3;
-    const cvvRegex = new RegExp(`^[0-9]{${cvvLength}}$`);
-    if (!cvvRegex.test(securityCode)) {
-      console.log('dentro do IF: ' + !cvvRegex.test(securityCode));
-      createError(field, 'Código inválido para este cartão.');
-      return false;
-    }
-
-    return true;
-  }
-
-  //Create error mensages
-  function createError(field, msg) {
-    const span = document.createElement('span');
-    span.innerHTML = msg;
-    span.classList.add('error-text');
-    field.insertAdjacentElement('afterend', span);
-  }
-
+  isChecked();
   valitationFields();
   document.querySelector('.getAddressWithCep').click();
+  // if (valid) console.log('todos os campos validados com sucesso!');
+}
+
+function validateCorporateReason(field) {
+  const corporateReason = field.value;
+  let valid = true;
+
+  if (corporateReason.length < 6) {
+    createError(field, 'Razão social precisa ter mais de 5 caracteres');
+    valid = false;
+  }
+  return valid;
+}
+
+function validateStateRegistration(field) {
+  const stateRegistration = field.value;
+  const regex = /^[0-9.-]+$/;
+  if (!regex.test(stateRegistration)) {
+    createError(field, 'Deve conter apenas número');
+    return false;
+  }
+  return true;
+}
+
+function validateCNPJ(field) {
+  let cnpjInput = field.value;
+  let cnpj = cnpjInput.replace(/[^\d]+/g, '');
+  if (cnpj.length != 14) {
+    createError(field, 'O CNPJ deve ter 14 digitos');
+    return false;
+  }
+  if (/^(\d)\1+$/.test(cnpj)) {
+    createError(field, 'Não pode ser digitos repetidos');
+    return false;
+  }
+  let soma = 0;
+  let peso = 5;
+  for (let i = 0; i < 12; i++) {
+    soma += parseInt(cnpj.charAt(i)) * peso--;
+    if (peso < 2) peso = 9;
+  }
+  let digito = 11 - (soma % 11);
+  if (digito > 9) digito = 0;
+  if (parseInt(cnpj.charAt(12)) != digito) {
+    createError(field, 'Primiero digito verificador errado');
+    return false;
+  }
+  soma = 0;
+  peso = 6;
+  for (let i = 0; i < 13; i++) {
+    soma += parseInt(cnpj.charAt(i)) * peso--;
+    if (peso < 2) peso = 9;
+  }
+  digito = 11 - (soma % 11);
+  if (digito > 9) digito = 0;
+  if (parseInt(cnpj.charAt(13)) != digito) {
+    createError(field, 'CNPJ inválido');
+    return false;
+  }
+  const cnpjFormatado = cnpj.replace(
+    /(\d{2})\.?(\d{3})\.?(\d{3})\/?(\d{4})\-?(\d{2})/,
+    '$1.$2.$3/$4-$5',
+  );
+  document.getElementById('cnpj').value = cnpjFormatado;
+  return true;
+}
+
+function validateName(field) {
+  const corporateReason = field.value;
+  let valid = true;
+  const nameRegex = /^[a-zA-ZÀ-ÿ]+(([',. -][a-zA-ZÀ-ÿ ])?[a-zA-ZÀ-ÿ]*)*$/;
+  if (corporateReason.length < 5 || !nameRegex.test(corporateReason)) {
+    createError(field, 'Nome invalido.');
+    valid = false;
+    return false;
+  }
+  return true;
+}
+
+function validateEmail(field) {
+  const email = field.value;
+  let valid = true;
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!regex.test(email)) {
+    createError(field, 'Email inválido');
+    valid = false;
+  }
+  return true;
+}
+
+function validateRG(field) {
+  const rgInput = field.value;
+  let rg = rgInput.replace(/\D/g, '');
+  if (rg.length < 6) {
+    createError(field, 'O RG deve ter mais de 6 dígitos');
+    valid = false;
+    return false;
+  }
+  const formattedValue = rg.replace(
+    /^(\d{2})(\d{3})(\d{3})(\d{1})$/,
+    '$1.$2.$3-$4',
+  );
+  document.getElementById('rg').value = formattedValue;
+  return true;
+}
+
+function validateCPF(field) {
+  const cpf = new ValidaCPF(field.value);
+  if (!cpf.valida()) {
+    createError(field, 'CPF inválido.');
+    return false;
+  }
+  let cpfInput = document.getElementById('cpf').value;
+  const regex = /^(\d{3})(\d{3})(\d{3})(\d{2})$/;
+  const cpfFormatado = cpfInput.replace(regex, '$1.$2.$3-$4');
+  document.getElementById('cpf').value = cpfFormatado;
+  return true;
+}
+
+function validatePhoneNumber(field) {
+  const phoneNumber = field.value.replace(/\D/g, '');
+  if (/[^\d\s()-]/.test(field.value)) {
+    createError(field, 'Número inválido.');
+    return false;
+  }
+  const ddd = phoneNumber.substring(0, 2);
+  const bodyPhone = phoneNumber.substring(2, phoneNumber.length);
+  let phoneFormated;
+  if (bodyPhone.length === 9) {
+    phoneFormated = bodyPhone.replace(/^(\d{5})(\d{4})/, '$1-$2');
+  } else if (bodyPhone.length === 8) {
+    phoneFormated = bodyPhone.replace(/^(\d{4})(\d{4})/, '$1-$2');
+  } else {
+    createError(field, 'Número precisa conter de 8 a 9 dígitos + o DDD.');
+    return false;
+  }
+  document.getElementById('telefone').value = `(${ddd}) ${phoneFormated}`;
+  return true;
+}
+
+function validateSelects(field) {
+  const ufValue = field.value;
+  const poloValue = field.value;
+
+  if (ufValue === '') {
+    return false;
+  }
+  if (poloValue === '') {
+    return false;
+  }
+
+  return true;
+}
+
+function valedateInputRadio(field) {
+  let isValid = false;
+  const requiredRadios = document.querySelectorAll(
+    'input[type="radio"].required',
+  );
+  requiredRadios.forEach((radio) => {
+    if (radio.checked) {
+      field.value;
+      isValid = true;
+    }
+  });
+
+  if (!isValid) {
+    createError(field, 'Selecione uma das opções.');
+    return false;
+  }
+  return true;
+}
+
+function validateNameCard(field) {
+  const cardName = field.value;
+  let valid = true;
+  const nameRegex = /^[a-zA-ZÀ-ÿ]+(([',. -][a-zA-ZÀ-ÿ ])?[a-zA-ZÀ-ÿ]*)*$/;
+  if (cardName.length < 5 || !nameRegex.test(cardName)) {
+    createError(field, 'Nome invalido.');
+    valid = false;
+    return false;
+  }
+  document.getElementById('nameCard').value = cardName.toUpperCase();
+  return true;
+}
+
+function validateNumberCard(field) {
+  const numberInput = field.value;
+  const onlyNumbers = numberInput.replace(/\D/g, '');
+
+  if (!/^\d+$/.test(onlyNumbers)) {
+    createError(field, 'Número inválido.');
+    return false;
+  }
+
+  if (numberInput.length < 12 || numberInput.length > 19) {
+    createError(field, 'Precisa ter entre 13 e 19 dígitos');
+    return false;
+  }
+  let sum = 0;
+  let double = false;
+
+  for (let i = onlyNumbers.length - 1; i >= 0; i--) {
+    const digit = parseInt(onlyNumbers.charAt(i));
+
+    if (double) {
+      if (digit * 2 > 9) {
+        sum += digit * 2 - 9;
+      } else {
+        sum += digit * 2;
+      }
+    } else {
+      sum += digit;
+    }
+
+    double = !double;
+  }
+  if (sum % 10 !== 0) {
+    createError(field, 'Número inválido.');
+    return false;
+  }
+  const regex = /(\d{4})(\d{4})(\d{4})(\d{4})/;
+  const formattedNumber = onlyNumbers.replace(regex, '$1 $2 $3 $4');
+  document.getElementById('numberCard').value = formattedNumber;
+
+  return true;
+}
+
+function validateCardValidation(field) {
+  const cardValidation = field.value;
+  const rawValue = cardValidation.replace(/\D/g, '');
+  const month = parseInt(rawValue.slice(0, 2));
+  const year = parseInt(rawValue.slice(2));
+  const currentYear = new Date().getFullYear() % 100;
+  const currentDate = new Date();
+  const currentMonth = currentDate.getMonth() + 1;
+
+  if (!/^\d+$/.test(rawValue)) {
+    createError(field, 'Apenas números.');
+    return false;
+  }
+  if (rawValue.length < 4) {
+    createError(field, 'Precisa de 4 dígitos para representar mês e ano');
+    return false;
+  }
+
+  if (month < 1 || month > 12) {
+    createError(field, 'Mês inválido.');
+    return false;
+  }
+
+  if (year < 0 || year > 99) {
+    createError(field, 'Ano inválido.');
+    return false;
+  }
+  if (year < currentYear) {
+    createError(field, 'Ano menor que ano atual.');
+    return false;
+  }
+
+  if (month < currentMonth && year === currentYear) {
+    createError(field, 'Validade expirada.');
+    return false;
+  }
+
+  const formattedValue = rawValue.replace(/(\d{2})(\d{0,2})/, '$1/$2');
+  document.getElementById('cardValidation').value = formattedValue;
+  return true;
+}
+
+function validateSecurityCode(field) {
+  const securityCode = field.value;
+  const cardNumber = document.getElementById('numberCard').value;
+  const onlyNumbers = cardNumber.replace(/\s/g, '');
+
+  if (!/^\d{3,4}$/.test(securityCode)) {
+    createError(field, 'O CVV deve ter de 3 a 4 dígitos.');
+    return false;
+  }
+  const cvvLength =
+    onlyNumbers.startsWith('34') || onlyNumbers.startsWith('37') ? 4 : 3;
+  const cvvRegex = new RegExp(`^[0-9]{${cvvLength}}$`);
+  if (!cvvRegex.test(securityCode)) {
+    console.log('dentro do IF: ' + !cvvRegex.test(securityCode));
+    createError(field, 'Código inválido para este cartão.');
+    return false;
+  }
+
+  return true;
+}
+
+//Create error mensages
+function createError(field, msg) {
+  const span = document.createElement('span');
+  span.innerHTML = msg;
+  span.classList.add('error-text');
+  field.insertAdjacentElement('afterend', span);
 }
 
 //Search address
@@ -457,11 +456,12 @@ function searcheAddress(cep) {
       span.innerHTML = 'CEP Inválido!';
       span.classList.add('error-text');
       cepInput.insertAdjacentElement('afterend', span);
-      return;
+      return false;
     }
   };
 
   xhr.send();
+  return true;
 }
 
 document.querySelector('.getAddressWithCep').addEventListener('click', () => {
@@ -494,20 +494,20 @@ function corporateFields() {
   }
   let newFields = `<div class="corporateReasonGroup">
   <label for="corporateReason" class="corporateReason">Razão social</label>
-  <input type="text" name="corporateReason" id="corporateReason" class="corporateReason required corporateName" placeholder="Digita a razão social*">
+  <input type="text" name="corporateReason" id="corporateReason" class="corporateReason required corporateName" placeholder="Digita a razão social*" onblur="blurAllField(event)">
 </div>
 <div class="corporateReasonGroup"">
   <label for="fantasyName" class="corporateReason">Nome fantasia</label>
-  <input type="text" name="fantasyName" id="fantasyName" class="corporateReason required" placeholder="Digite o nome fantasia*">
+  <input type="text" name="fantasyName" id="fantasyName" class="corporateReason required" placeholder="Digite o nome fantasia*" onblur="blurAllField(event)">
 </div>
 
 <div class="corporateReasonGroup"">
   <label for="cnpj" class="corporateReason">CNPJ</label>
-  <input type="text" name="cnpj" id="cnpj" class="corporateReason required cnpj" placeholder="Digite o CNPJ*">
+  <input type="text" name="cnpj" id="cnpj" class="corporateReason required cnpj" placeholder="Digite o CNPJ*" onblur="blurAllField(event)">
 </div>
 <div class="corporateReasonGroup">
   <label for="stateRegistration" class="corporateReason">Inscrição estadual</label>
-  <input type="text" id="stateRegistration" class="corporateReason required stateRegistration" name="stateRegistration" placeholder="Digite a inscrição Estadual*">
+  <input type="text" id="stateRegistration" class="corporateReason required stateRegistration" name="stateRegistration" placeholder="Digite a inscrição Estadual*" onblur="blurAllField(event)">
 </div>`;
   const recipientBox = document.querySelector('.partOne');
   boxForNewFields = document.createElement('div');
@@ -529,7 +529,8 @@ function createCredtCardFilelds() {
   name="nameCard-lp"
   id="nameCard"
   placeholder="Nome no cartão"
-  class="physicalPerson"
+  class="physicalPerson cardName requiredCreditCar"
+  onblur="blurAllField(event)"
 />
 <input
   type="text"
@@ -538,7 +539,18 @@ function createCredtCardFilelds() {
   placeholder="Número do cartão*"
   class="physicalPerson requiredCreditCar numberCard"
   maxlength="19"
+  onblur="blurAllField(event)"
 />
+<span class="cardInfoBox">
+<input
+  type="text"
+  name="cardSafeCode-lp"
+  id="cardSafeCode"
+  placeholder="Cod. Seg*"
+  class="physicalPerson cardSafeCode requiredCreditCar"
+  onblur="blurAllField(event)"
+/></span>
+<span class="cardInfoBox">
 <input
   type="text"
   name="cardValidation-lp"
@@ -546,14 +558,8 @@ function createCredtCardFilelds() {
   placeholder="MM/AA"
   maxlength="4"
   class="physicalPerson cardValidation requiredCreditCar"
-/>
-<input
-  type="text"
-  name="cardSafeCode-lp"
-  id="cardSafeCode"
-  placeholder="Cod. Seg*"
-  class="physicalPerson cardSafeCode requiredCreditCar"
-/>`;
+  onblur="blurAllField(event)"
+/></span>`;
   boxForNewFields = document.createElement('div');
   boxForNewFields.classList.add('formCreditCar');
   boxForNewFields.innerHTML = newFields;
@@ -577,7 +583,6 @@ function handlePaymentSelection() {
   }
   switch (selectedOption) {
     case 'creditCar':
-      // creditCarBox.style.display = 'flex';
       createCredtCardFilelds();
       break;
     case 'pix':
@@ -591,36 +596,19 @@ function handlePaymentSelection() {
   }
 }
 
-//Validate credit card
-// function validateCreditCardFields(field) {
-//   // const numberCard = document.getElementById('numberCard');
-//   // const cardSafeCode = document.getElementById('cardSafeCode');
-//   // const cardValidation = document.getElementById('cardValidation');
-//   const numberCard = field.value;
-//   const cardSafeCode = field.value;
-//   const cardValidation = field.value;
-//   // Validando o número do cartão
-//   if (!/^\d+$/.test(numberCard.value)) {
-//     createError(field, 'Número inválido.');
-//     return false;
-//   }
-
-//   // Validando o código de segurança do cartão
-//   if (!/^\d{3}$/.test(cardSafeCode.value)) {
-//     createError(field, 'Código inválido.');
-//     return false;
-//   }
-
-//   // Validando a validade do cartão
-//   const cardValidationRegex = /^(0[1-9]|1[0-2])\/(\d{2})$/;
-//   if (!cardValidationRegex.test(cardValidation.value)) {
-//     createError(field, 'Data inválida. Digite no formato MM/AA.');
-//     return false;
-//   }
-
-//   // Todos os campos obrigatórios foram validados
-//   return true;
-// }
+//Terms checkbox
+function isChecked() {
+  const checkbox = document.getElementById('term-lp');
+  const errorMsg = document.querySelector('.termErrorMsg');
+  const msg = `Precisar aceitar os Termos <br />e a Política`;
+  if (checkbox.checked) {
+    errorMsg.innerHTML = '';
+    return true;
+  } else {
+    errorMsg.innerHTML = msg;
+    return false;
+  }
+}
 
 // Add events in the input radio
 const paymentInputs = document.querySelectorAll('input[name="payment"]');
@@ -628,5 +616,54 @@ for (let i = 0; i < paymentInputs.length; i++) {
   paymentInputs[i].addEventListener('click', handlePaymentSelection);
 }
 
+//Blur events functions
+function blurAllField(event) {
+  const form = document.querySelector('.form');
+  for (let erroText of form.querySelectorAll('.error-text')) {
+    erroText.remove();
+  }
+  const field = event.target;
+  if (field.type === 'text' && field.name === 'corporateReason') {
+    validateCorporateReason(field);
+  } else if (field.type === 'text' && field.name === 'cnpj') {
+    validateCNPJ(field);
+  } else if (field.type === 'text' && field.name === 'stateRegistration') {
+    validateStateRegistration(field);
+  } else if (field.type === 'text' && field.name === 'name') {
+    validateName(field);
+  } else if (field.type === 'email' && field.name === 'email') {
+    validateEmail(field);
+  } else if (field.type === 'text' && field.name === 'rg') {
+    validateRG(field);
+  } else if (field.type === 'text' && field.name === 'cpf') {
+    validateCPF(field);
+  } else if (field.type === 'text' && field.name === 'telefone') {
+    validatePhoneNumber(field);
+  } else if (field.type === 'text' && field.name === 'cep') {
+    document.querySelector('.getAddressWithCep').click();
+  } else if (field.type === 'number' && field.name === 'number') {
+    for (let erroText of form.querySelectorAll('.error-text')) {
+      erroText.remove();
+    }
+  } else if (field.type === 'text' && field.name === 'captcha') {
+    for (let erroText of form.querySelectorAll('.error-text')) {
+      erroText.remove();
+    }
+  } else if (field.type === 'text' && field.name === 'nameCard-lp') {
+    validateNameCard(field);
+  } else if (field.type === 'text' && field.name === 'numberCard-lp') {
+    validateNumberCard(field);
+  } else if (field.type === 'text' && field.name === 'cardValidation-lp') {
+    validateCardValidation(field);
+  } else if (field.type === 'text' && field.name === 'cardSafeCode-lp') {
+    validateSecurityCode(field);
+  }
+}
+
 formBtn.addEventListener('click', sendForm);
+document.addEventListener('keydown', function (event) {
+  if (event.key === 'Enter') {
+    sendForm();
+  }
+});
 physicalPersonClick();

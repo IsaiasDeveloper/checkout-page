@@ -1,22 +1,7 @@
-/*
 :root {
-    --primary: #22D2B3;
-    --secundary: #003399;
-    --support: #199983;
-    --blackColor: #000000;
-    --whiteColor: #FFFFFF;
-    --grayColor: #5C6F82;
-    --iceColor: #F5F5F5;
-    --cardsBarColor: #CBCDCE;
-    --findAppMaskColor: #0C162F;
-    --findAppMasc: #081018;
-    --defaultFont: "Montserrat";
-    --Oswald: "BIZ UDGothic", sans-serif;
-    --transparentdarkColor: #081018c4;
-    --transparentWindow: #081018eb;
-    --inputsBgLogin: #ffffff1f;
+  --redColor: red;
 }
-*/
+
 body,
 * {
   margin: 0;
@@ -292,8 +277,7 @@ input::placeholder {
 }
 .partThree {
   position: absolute;
-  bottom: -333px;
-  /* left: 44px; */
+  bottom: -370px;
   left: 37px;
   right: 0;
   height: auto;
@@ -301,10 +285,10 @@ input::placeholder {
 }
 .partThreeContent {
   max-width: 1000px;
-  /* width: 90%; */
   width: 100%;
+  min-height: 295px;
+  height: auto;
   margin: auto;
-  /* margin-left: -11px; */
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -363,7 +347,6 @@ input::placeholder {
   flex-wrap: wrap;
   justify-content: start;
   align-items: start;
-  /* row-gap: 10px; */
 }
 .formCreditCar input:not(:first-child) {
   margin-top: 15px;
@@ -374,23 +357,17 @@ input::placeholder {
   justify-content: start;
   align-items: end;
 }
-.formCreditCar span + span {
+.cardInfoBox {
+  min-width: 105px;
   width: 35%;
-  display: flex;
-  flex-direction: column;
   margin-top: 15px;
 }
-.formCreditCar div span {
-  width: 40%;
-  display: flex;
-  flex-direction: column;
-}
+
 .cardSafeCode {
-  width: 30%;
-  margin-left: 30px;
+  width: 80%;
 }
 .cardValidation {
-  width: 23%;
+  width: 70%;
 }
 
 .captchaBox {
@@ -423,18 +400,34 @@ input::placeholder {
   align-items: center;
 }
 .termLabel {
-  width: 43%;
+  width: 46%;
   display: flex;
-  flex-direction: unset;
+  flex-direction: flex;
   justify-content: start;
   align-items: start;
   white-space: nowrap;
   /* margin-right: 35px; */
 }
+.termErrorMsg {
+  width: 100%;
+  text-align: center;
+  font-size: 11px;
+  color: var(--redColor);
+  margin: 5px 0;
+}
+.organizationBox {
+  width: 100%;
+  display: flex;
+  flex-direction: unset;
+  justify-content: start;
+  align-items: start;
+  white-space: nowrap;
+}
 .checkboxInput {
   width: 15px;
   height: 15px;
   margin: 5px 10px 0 0;
+  cursor: pointer;
 }
 .termBtnBox a {
   color: var(--primary);
@@ -476,7 +469,7 @@ input::placeholder {
   color: var(--primary);
 }
 .invalid-field {
-  border: 1px solid red;
+  border: 1px solid var(--redColor);
 }
 /* Secund Column */
 .secundColumn {
@@ -564,7 +557,7 @@ input::placeholder {
   left: 23px;
   height: 2px;
   width: 106px;
-  background-color: red;
+  background-color: var(--redColor);
 }
 .newPriceBox {
   max-width: 95%;
@@ -698,7 +691,7 @@ input::placeholder {
   width: auto;
   font-size: 11px;
   font-weight: 500;
-  color: red;
+  color: var(--redColor);
   display: block;
   width: 100%;
 }
@@ -739,12 +732,16 @@ input::placeholder {
     width: 100%;
     margin: auto;
   }
+
   .infoCourse,
   .insertDiscountCouponBox {
     max-width: 380px;
     width: 100%;
     margin: 0 auto;
     position: relative;
+  }
+  .contentInfoCourse {
+    margin-bottom: 20px;
   }
   .infoInstituteColumnTwo {
     display: none;
@@ -816,6 +813,9 @@ input::placeholder {
   .termLabel {
     margin: 0;
     width: 100%;
+    justify-content: center;
+  }
+  .organizationBox {
     justify-content: center;
   }
 }
