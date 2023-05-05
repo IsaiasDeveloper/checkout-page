@@ -42,12 +42,3 @@ class ValidaCPF {
     return this.novoCPF === this.cfpLimpo;
   }
 }
-
-// let validacpf = new ValidaCPF('070.987.721-03');
-// validacpf = new ValidaCPF('999.999.99-99');
-
-// if(validacpf.valida()){
-//     console.log("CPF válido!")
-// } else {
-//     console.log("CPF inválido!")
-// }

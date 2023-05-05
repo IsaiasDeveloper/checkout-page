@@ -10,9 +10,7 @@ body,
 }
 body {
   background-color: var(--iceColor);
-  /* background-color: var(--grayColor); */
   font-family: var(--defaultFont) !important;
-  padding-bottom: 340px;
 }
 
 /* Nav seciton */
@@ -42,10 +40,8 @@ nav {
   width: 90%;
   margin: auto;
   display: flex;
-  /* justify-content: space-between; */
   justify-content: space-around;
   align-items: start;
-  position: relative;
 }
 .firstColumn {
   width: 45%;
@@ -62,12 +58,21 @@ nav {
   row-gap: 20px;
 }
 
-.verticalBar {
+.infoVerticalBar {
   position: absolute;
-  top: 23px;
-  left: 10px;
+  top: -77px;
+  left: -27px;
+  bottom: -60px;
   width: 2px;
-  height: 102%;
+  background-color: var(--cardsBarColor);
+  z-index: 0;
+}
+.chooseVerticalBar {
+  position: absolute;
+  top: -13px;
+  left: -27px;
+  bottom: -35px;
+  width: 2px;
   background-color: var(--cardsBarColor);
   z-index: 0;
 }
@@ -86,8 +91,7 @@ nav {
   width: 31px;
   height: 29px;
 }
-.thirdFields {
-}
+
 .formBox {
   width: 90%;
   display: flex;
@@ -112,7 +116,6 @@ nav {
   align-items: start;
   margin-bottom: 15px;
 }
-/*  legalPersonForm */
 .physicalPersonOption,
 .legalPersonOption {
   width: 50%;
@@ -150,6 +153,7 @@ form {
 }
 .partOne {
   margin-bottom: 30px;
+  position: relative;
 }
 label {
   display: flex;
@@ -160,7 +164,6 @@ label {
   text-align: start;
   font-weight: 600;
   color: var(--grayColor);
-  /* margin-top: 15px; */
   margin-top: 5px;
 }
 input {
@@ -171,7 +174,6 @@ input {
   border-radius: 5px;
   padding-left: 10px;
   height: 30px;
-  /* margin-bottom: 7px; */
   margin-top: 1px;
   outline: none;
 }
@@ -233,10 +235,15 @@ input::placeholder {
 .partTwo {
   width: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: start;
   align-items: start;
   margin-bottom: 10px;
+  position: relative;
+}
+.infoInstituteColumnOne {
+  position: absolute;
+  bottom: 0;
+  right: -355px;
 }
 .selectBox {
   width: 100%;
@@ -276,19 +283,11 @@ input::placeholder {
   width: 63%;
 }
 .partThree {
-  position: absolute;
-  bottom: -370px;
-  left: 37px;
-  right: 0;
   height: auto;
-  margin-bottom: 60px;
+  width: 100%;
 }
 .partThreeContent {
-  max-width: 1000px;
   width: 100%;
-  min-height: 295px;
-  height: auto;
-  margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -297,21 +296,23 @@ input::placeholder {
 .partThreeFields {
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: start;
-  align-items: center;
+  align-items: start;
   column-gap: 30px;
   row-gap: 30px;
+
+  position: relative;
 }
 .partThreeAllBoxes {
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: space-between;
   align-items: start;
 }
 .typOfPayment {
-  width: 48%;
+  width: 100%;
   height: 120px;
   display: flex;
   justify-content: start;
@@ -338,15 +339,15 @@ input::placeholder {
   color: var(--primary);
   background-color: var(--primary);
 }
-.formCreditCar,
-.termBtnBox {
-  width: 48%;
-}
 .formCreditCar {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: start;
   align-items: start;
+
+  position: absolute;
+  right: -470px;
 }
 .formCreditCar input:not(:first-child) {
   margin-top: 15px;
@@ -371,7 +372,7 @@ input::placeholder {
 }
 
 .captchaBox {
-  width: 30%;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -388,6 +389,7 @@ input::placeholder {
   display: flex;
   justify-content: space-between;
   align-items: start;
+  margin-bottom: 10px;
 }
 .captchaBox img {
   width: 100px;
@@ -395,9 +397,10 @@ input::placeholder {
   margin-left: 15px;
 }
 .termBtnBox {
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
 }
 .termLabel {
   width: 46%;
@@ -406,7 +409,6 @@ input::placeholder {
   justify-content: start;
   align-items: start;
   white-space: nowrap;
-  /* margin-right: 35px; */
 }
 .termErrorMsg {
   width: 100%;
@@ -459,9 +461,6 @@ input::placeholder {
   display: none;
 }
 
-#legalPersonForm {
-  /* display: none; */
-}
 .unselected {
   border-bottom: 2px solid var(--primary);
 }
@@ -580,6 +579,7 @@ input::placeholder {
   width: 150px;
   height: 30px;
   border: 1px solid var(--cardsBarColor);
+  background-color: var(--whiteColor);
   border-radius: 5px;
   font-size: 17px;
   color: var(--blackColor);
@@ -632,7 +632,7 @@ input::placeholder {
   width: 100%;
   padding: 10px;
   position: relative;
-  display: flex;
+  /* display: none; */
   flex-direction: column;
   justify-content: start;
   align-items: start;
@@ -651,13 +651,6 @@ input::placeholder {
   right: 0;
   width: 120px;
   height: 100%;
-}
-.logoAddressBox {
-  width: 100%;
-  /* display: flex; */
-  flex-direction: column;
-  justify-content: start;
-  align-items: start;
 }
 .logoAddressImg {
   width: 100%;
@@ -683,9 +676,7 @@ input::placeholder {
   text-align: start;
   font-size: 11px;
 }
-.infoInstituteColumnOne {
-  display: none;
-}
+
 .error-text {
   height: 11px;
   width: auto;
@@ -714,7 +705,8 @@ input::placeholder {
   .contentContainer {
     flex-direction: column;
   }
-  .verticalBar {
+  .infoVerticalBar,
+  .chooseVerticalBar {
     display: none;
   }
   .firstColumn {
@@ -740,7 +732,7 @@ input::placeholder {
     margin: 0 auto;
     position: relative;
   }
-  .contentInfoCourse {
+  .infoCourse {
     margin-bottom: 20px;
   }
   .infoInstituteColumnTwo {
@@ -751,7 +743,8 @@ input::placeholder {
     width: 100%;
   }
   .partTwo {
-    margin-bottom: 30px;
+    position: unset;
+    flex-direction: column;
   }
   .partThree {
     position: unset;
@@ -759,15 +752,19 @@ input::placeholder {
   .infoInstituteColumnOne {
     display: flex;
     margin-bottom: 50px;
+    position: unset;
+    flex-direction: column;
+    margin-top: 25px;
   }
   .typOfPayment,
-  .formCreditCar,
   .captchaBox,
   .termBtnBox {
     width: 100%;
   }
-  body {
-    padding-bottom: 0;
+
+  .formCreditCar {
+    width: 100%;
+    position: unset;
   }
 }
 
@@ -791,6 +788,8 @@ input::placeholder {
   }
   .termBtnBox {
     flex-direction: column;
+    row-gap: 15px;
+    align-items: center;
   }
   .typOfPayment {
     justify-content: space-between;
@@ -817,5 +816,9 @@ input::placeholder {
   }
   .organizationBox {
     justify-content: center;
+  }
+  .formSubmitBtn {
+    font-size: 14px;
+    width: auto;
   }
 }
